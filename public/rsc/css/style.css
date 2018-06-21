@@ -338,7 +338,7 @@ a.menu__link {
 
 .box_1 {
     background: #2fdab8;
-    padding: 15px 22px;
+    padding: 15px;
     text-align: center;
 }
 
@@ -643,7 +643,8 @@ figure.effect-roxy:hover p,
 /*-- footer --*/
 
 .footer {
-    padding: 4em 0;
+    padding: 10px auto;
+    margin-top: 50px;
     background: #000;
 }
 
@@ -772,7 +773,7 @@ ul.social-nav.model-3d-0.footer-social.w3_agile_social.two {
 .w3-address-right p {
     margin: 1em 0 0 0;
     font-size: .9em;
-    color: #565656;
+    color: #a8a8a8;
 }
 
 .w3-address-right p a {
@@ -1461,7 +1462,7 @@ button.w3view-cart {
     background: #17c3a2;
     width: 48px;
     height: 43px;
-    font-size: 24px;
+    font-size: 30px;
     color: #000;
 }
 
@@ -1895,7 +1896,8 @@ ul.multi-column-dropdown li a:hover {
 .coupons,
 .banner-bootom-w3-agileits,
 .new_arrivals_agile_w3ls_info {
-    padding: 4em 0;
+    padding: 1.5em 0;
+    background-color: black;
 }
 
 .w3layouts_mail_grid {
@@ -1941,7 +1943,7 @@ ul.multi-column-dropdown li a:hover {
 }
 
 .w3layouts_mail_grid_left2 p {
-    color: #545454;
+    color: #a8a8a8;
     font-size: 0.9em;
     line-height: 1.8em;
 }
@@ -3848,7 +3850,39 @@ p.w3ls_para {
     filter: alpha(opacity=0);
 }
 
-/* Override here */
+/* Layout */
+
+button.w3view-cart {
+    width: 90%;
+}
+
+.ban-top {
+    margin-bottom: 50px;
+}
+
+.footer_inner {
+    width: 90%;
+    margin: 0 auto;
+}
+
+.footer-left {
+    width: 40%;
+    float: left;
+    text-align: center;
+}
+
+.footer-right {
+    width: 40%;
+    float: right;
+}
+
+.footer-left p {
+    color: #a8a8a8;
+    line-height: 2em;
+    font-size: 14px;
+    margin-top: 22px;
+    text-align: justify;
+}
 
 /* Media queries */
 
@@ -3869,5 +3903,23 @@ p.w3ls_para {
     }
     .header-user {
         margin-top: 10px;
+    }
+    .navbar-toggle {
+        position: relative;
+        float: left;
+        padding: 12px 10px;
+        margin-top: 9px;
+        margin-right: 0px;
+        margin-bottom: 8px;
+        background-color: transparent;
+        background-image: none;
+        border: 1px solid transparent;
+        border-radius: 0;
+        margin-left: 0px;
+    }
+    .top_nav_right {
+        float: right;
+        width: 31%;
+        box-sizing: border-box;
     }
 }
