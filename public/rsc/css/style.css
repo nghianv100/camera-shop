@@ -95,7 +95,7 @@ label {
 /* header: Search, Logo, User */
 
 .header {
-    padding: 20px 20px;
+    padding: 0 20px;
     margin: 0 auto;
 }
 
@@ -103,24 +103,22 @@ label {
     text-align: center;
 }
 
-.header-bottom {
-    margin-top: 10px;
-}
-
 .header-search {
     display: inline-block;
     float: left;
-    width: 45%;
+    padding-left: 60px;
+    width: 40%;
 }
 
 .header-search .input-group {
-    width: 90%;
+    width: 80%;
 }
 
 .header-user {
     display: inline-block;
     float: right;
-    width: 45%;
+    padding-right: 60px;
+    width: 55%;
 }
 
 .header-user span.glyphicon-user {
@@ -3901,8 +3899,15 @@ button.w3view-cart {
     .header-bar ul li:nth-child(2) {
         border-right: 0px;
     }
+    .header-search .input-group {
+        width: 90%;
+    }
+    .header-search {
+        padding-left: 10px;
+    }
     .header-user {
         margin-top: 10px;
+        padding-right: 10px;
     }
     .navbar-toggle {
         position: relative;
