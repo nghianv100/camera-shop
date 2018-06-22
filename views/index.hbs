@@ -1,2 +1,71 @@
-<h1>{{title}}</h1>
-<p>Welcome to {{title}}</p>
+<div class="index-main container">
+    <h3 class="title">Top 10
+        <span>Sản phẩm</span>
+    </h3>
+    <div id="horizontalTab">
+        <ul class="resp-tabs-list">
+            <li>Mới nhất</li>
+            <li>Bán chạy nhất</li>
+            <li>Xem nhiều nhất</li>
+        </ul>
+        <div class="resp-tabs-container">
+            <div class="tab1">
+                {{#each new_list}}
+                <div class="col-md-3 product-cell">
+                    <div class="men-pro-item simpleCart_shelfItem">
+                        <div class="men-thumb-item">
+                            <img src="/product/{{idsanpham}}/{{img}}" class="pro-image-front">
+                            <img src="/product/{{idsanpham}}/{{img}}" class="pro-image-back">
+                            <div class="men-cart-pro">
+                                <div class="inner-men-cart-pro">
+                                    <a href="#" class="link-product-add-cart">Xem chi tiết</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="item-info-product">
+                            <h4>
+                                <a href="single.html">Panasonic Lumix GH5</a>
+                            </h4>
+                            <div class="info-product-price">
+                                <span class="item_price">1500000</span>
+                            </div>
+                            <div style="text-align: center; font-size: 0.9em;">
+                                <span class="nview glyphicon glyphicon-eye-open"></span>
+                                <span class="nview">1234</span>
+                                <span>
+                                    &nbsp; &nbsp; &nbsp;
+                                </span>
+                                <span class="nsold glyphicon glyphicon-check"></span>
+                                <span class="nsold">4321</span>
+                            </div>
+                            <div class="snipcart-details top_brand_home_details item_add single-item hvr-outline-out button2">
+                                <form action="#" method="post">
+                                    <fieldset>
+                                        <input type="hidden" name="cmd" value="_cart" />
+                                        <input type="hidden" name="add" value="1" />
+                                        <input type="hidden" name="business" value=" " />
+                                        <input type="hidden" name="item_name" value="Formal Blue Shirt" />
+                                        <input type="hidden" name="amount" value="30.99" />
+                                        <input type="hidden" name="discount_amount" value="1.00" />
+                                        <input type="hidden" name="currency_code" value="USD" />
+                                        <input type="hidden" name="return" value=" " />
+                                        <input type="hidden" name="cancel_return" value=" " />
+                                        <input type="submit" name="submit" value="Thêm vào giỏ" class="button" />
+                                    </fieldset>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {{/each}}
+                <div class="clearfix"></div>
+            </div>
+            <div class="tab2">
+                <div class="clearfix"></div>
+            </div>
+            <div class="tab3">
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>
