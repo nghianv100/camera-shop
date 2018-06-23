@@ -118,18 +118,11 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                       </div>
                       <div class="col-sm-6 multi-gd-img">
                         <ul class="multi-column-dropdown">
+                          {{#each layoutVM.types}}
                           <li>
-                            <a href="mens.html">DSLR</a>
+                            <a href="mens.html">{{this}}</a>
                           </li>
-                          <li>
-                            <a href="mens.html">Compact</a>
-                          </li>
-                          <li>
-                            <a href="mens.html">Mirrorless</a>
-                          </li>
-                          <li>
-                            <a href="mens.html">360 độ</a>
-                          </li>
+                          {{/each}}
                         </ul>
                       </div>
                       <div class="clearfix"></div>
@@ -144,24 +137,11 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                     <div class="agile_inner_drop_nav_info">
                       <div class="col-sm-6 multi-gd-img">
                         <ul class="multi-column-dropdown">
+                          {{#each layoutVM.brands}}
                           <li>
-                            <a href="womens.html">Canon</a>
+                            <a href="womens.html">{{this}}</a>
                           </li>
-                          <li>
-                            <a href="womens.html">Nikon</a>
-                          </li>
-                          <li>
-                            <a href="womens.html">Kodak</a>
-                          </li>
-                          <li>
-                            <a href="womens.html">Fujifilm</a>
-                          </li>
-                          <li>
-                            <a href="womens.html">Sony</a>
-                          </li>
-                          <li>
-                            <a href="womens.html">Khác</a>
-                          </li>
+                          {{/each}}
                         </ul>
                       </div>
                       <div class="col-sm-6 multi-gd-img multi-gd-text ">
