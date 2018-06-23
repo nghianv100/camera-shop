@@ -3,12 +3,15 @@ var createError = require('http-errors');
 var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
+var bodyParser = require('body-parser');
 var logger = require('morgan');
 var handleLayout = require('./middlewares/handleLayout');
 
 // Khai báo các Controller
-var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
+var indexRouter = require('./routes/index'),
+    usersRouter = require('./routes/users'),
+    signinRouter = require('./routes/signin'),
+    signupRouter = require('./routes/signup');
 
 var app = express();
 
@@ -26,6 +29,11 @@ app.use(handleLayout);
 
 // Chuyển tiếp cho các Controller xử lý
 app.use('/', indexRouter);
+app.get('/home', function(req, res) {
+  res.redirect('/');
+})
+app.use('/signin', signinRouter);
+app.use('/signup', signupRouter);
 app.use('/users', usersRouter);
 
 // Bắt lỗi
