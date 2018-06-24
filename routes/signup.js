@@ -2,8 +2,8 @@ var express = require('express');
 var md5 = require('md5');
 var accountDAO = require('../database/accountDAO');
 
-// Chưa kiểm tra Email
-// Chưa kiểm tra độ dài mật khẩu
+// Đã kiểm tra định dạng Email
+// Đã kiểm tra độ dài mật khẩu
 // Chưa kiểm tra mật khẩu trùng nhau
 // Chưa kiểm tra Email đã tồn tại hay chưa
 

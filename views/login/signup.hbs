@@ -1,27 +1,26 @@
-<script src="https://www.google.com/recaptcha/api.js" async defer></script>
 <div class="container signin-area">
+    {{!-- <div class="alert alert-danger" role="alert">Email của bạn đã được đăng ký.</div> --}}
     <h3 class="signin-title">
         ĐĂNG KÝ
         <span>NGAY</span>
     </h3>
     <div class="modal-body modal-body-sub">
-        <form action="/signup" method="post">
+        <form action="/signup" method="POST">
             <div class="styled-input agile-styled-input-top">
-                <input type="text" name="email" required>
+                <input required type="email" name="email">
                 <label>Email</label>
                 <span></span>
             </div>
             <div class="styled-input">
-                <input type="password" name="password" required>
+                <input required type="password" name="password" minlength="8" maxlength="32">
                 <label>Password</label>
                 <span></span>
             </div>
             <div class="styled-input">
-                <input type="password" name="password_confirm" required>
+                <input required type="password" name="password_confirm" minlength="8" maxlength="32">
                 <label>Confirm Password</label>
                 <span></span>
             </div>
-            {{!-- <div class="g-recaptcha" data-sitekey="6LdvZWAUAAAAAIJtvXzLHRG434THJKy0qcE38epw" style="text-align: center"></div> --}}
             <input type="submit" value="ĐĂNG KÝ">
         </form>
         <div class="signup-tip">
