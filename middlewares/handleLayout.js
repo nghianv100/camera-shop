@@ -1,4 +1,5 @@
 var productDAO = require('../database/productDAO');
+var switcher = require('../utils/switchCode')
 
 module.exports = function (req, res, next) {
     productDAO.loadTypes().then(rowsTypes => {
@@ -7,20 +8,7 @@ module.exports = function (req, res, next) {
             var brandsList = [];
 
             for (var i = 0; i < rowsTypes.length; i++) {
-                switch (rowsTypes[i].loai) {
-                    case '360degree':
-                        typesList[i] = '360 độ';
-                        break;
-                    case 'compact':
-                        typesList[i] = 'Compact';
-                        break;
-                    case 'dslr':
-                        typesList[i] = 'DSLR';
-                        break;
-                    case 'mirrorless':
-                        typesList[i] = 'Mirrorless';
-                        break;
-                }
+                typesList[i] = switcher.codeToType(rowsTypes[i].loai);
             }
 
             for (var i = 0; i < rowsBrands.length; i++) {

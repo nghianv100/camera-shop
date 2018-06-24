@@ -24,3 +24,18 @@ module.exports.loadBrands = function() {
     var sql = `SELECT DISTINCT nhasanxuat FROM sanpham;`;
     return db.executeQuery(sql);
 }
+
+module.exports.loadProduct = function(id) {
+    var sql = `SELECT * FROM sanpham WHERE idsanpham = "${id}";`;
+    return db.executeQuery(sql);
+}
+
+module.exports.loadProductRelatedType = function (type, id) {
+    var sql = `SELECT * FROM sanpham WHERE loai = "${type}" AND idsanpham != "${id}" LIMIT 5;`;
+    return db.executeQuery(sql);
+}
+
+module.exports.loadProductRelatedBrand = function(brand, id) {
+    var sql = `SELECT * FROM sanpham WHERE nhasanxuat = "${brand}" AND idsanpham != "${id}" LIMIT 5;`;
+    return db.executeQuery(sql);
+}

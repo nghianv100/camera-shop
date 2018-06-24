@@ -1,3 +1,7 @@
+// CƠ SỞ DỮ LIỆU DÙNG TIẾNG VIỆT:
+      // sanpham: idsanpham, gia, loai, luotxem, luotban, mota, xuatxu, nhasanxuat, img, tensanpham, ngaytiepnhan
+      // taikhoan: email, matkhau, hoten, sdt, admin
+
 // Khai báo các module cần sử dụng
 var createError = require('http-errors');
 var express = require('express');
@@ -9,9 +13,9 @@ var handleLayout = require('./middlewares/handleLayout');
 
 // Khai báo các Controller
 var indexRouter = require('./routes/index'),
-    usersRouter = require('./routes/users'),
     signinRouter = require('./routes/signin'),
-    signupRouter = require('./routes/signup');
+    signupRouter = require('./routes/signup'),
+    productRouter = require('./routes/product');
 
 var app = express();
 
@@ -34,7 +38,7 @@ app.get('/home', function(req, res) {
 })
 app.use('/signin', signinRouter);
 app.use('/signup', signupRouter);
-app.use('/users', usersRouter);
+app.use('/product', productRouter);
 
 // Bắt lỗi
 app.use(function(req, res, next) {

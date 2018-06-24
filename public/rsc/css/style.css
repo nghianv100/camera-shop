@@ -1308,7 +1308,7 @@ h3.title span {
 }
 
 .snipcart-details input.button {
-    font-size: 13px;
+    font-size: 16px;
     color: #fff;
     background: #2fdab8;
     text-decoration: none;
@@ -1622,7 +1622,7 @@ a.single-item {
 }
 
 .occasion-cart {
-    width: 30%;
+    width: 40%;
 }
 
 /*-- /sale --*/
@@ -6180,4 +6180,81 @@ h3.signin-title span {
 .modal-body.modal-body-sub .signup-tip a {
     color: blue;
     font-size: 1em;
+}
+
+/* Product detail  */
+
+.single-product-detail {
+    margin: 64px auto;
+}
+
+.single-product-detail-inner-left {
+    max-width: 400px;
+    padding: 15px;
+    box-sizing: border-box;
+}
+
+.single-product-detail-inner-right {
+    padding: 15px;
+    box-sizing: border-box;
+}
+
+.single-product-detail h3.single-product-name {
+    font-size: 2.8em;
+    font-weight: bold;
+    margin: 10px 0;
+    color: #cf0707;
+}
+
+.single-product-detail h4.single-product-price {
+    font-size: 1.4em;
+    font-weight: bold;
+    margin: 10px 0 30px 0;
+}
+
+.single-product-detail .single-product-detail-inner-right p span {
+    color: darkblue;
+    font-weight: bold;
+}
+
+.product-related,
+.product-related {
+    margin-top: 30px;
+    padding: 20px;
+}
+
+.product-related h4.title {
+    text-align: center;
+    font-weight: bold;
+    color: gray;
+    margin-bottom: 20px;
+}
+
+.product-related .product-related-cell {
+    width: 100%;
+    height: 85px;
+    margin: 25px 0;
+    background-color: rgba(150, 150, 150, 0.2);
+}
+
+.product-related-cell img {
+    width: 25%;
+    height: 85px;
+    max-width: 135px;
+    float: left;
+    margin-right: 10px;
+}
+
+.product-related-cell-name,
+.product-related-cell-price {
+    padding-top: 10px;
+}
+
+.product-related-cell-name {
+    font-size: 1.1em;
+    font-weight: bold;
+    color: #cf0707;
+}
+
+.product-related-cell-price {
 }
