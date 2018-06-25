@@ -19,4 +19,8 @@ router.get('/', function(req, res, next) {
     });
 });
 
+router.get('/list', function(req, res, next) {
+    res.render('product/list');
+});
+
 module.exports = router;
