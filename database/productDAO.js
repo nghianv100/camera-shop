@@ -93,3 +93,8 @@ module.exports.searchProduct = function (name, brand, type, nation, min, max) {
     
     return db.executeQuery(sql);
 }
+
+module.exports.increaseViews = function(id) {
+    var sql = `UPDATE sanpham SET luotxem = luotxem + 1 WHERE idsanpham = "${id}";`
+    return db.executeQuery(sql);
+}
