@@ -15,7 +15,8 @@ var handleLayout = require('./middlewares/handleLayout');
 var indexRouter = require('./routes/index'),
     signinRouter = require('./routes/signin'),
     signupRouter = require('./routes/signup'),
-    productRouter = require('./routes/product');
+    productRouter = require('./routes/product'),
+    searchRouter = require('./routes/search');
 
 var app = express();
 
@@ -39,6 +40,7 @@ app.get('/home', function(req, res) {
 app.use('/signin', signinRouter);
 app.use('/signup', signupRouter);
 app.use('/product', productRouter);
+app.use('/search', searchRouter);
 
 // Bắt lỗi
 app.use(function(req, res, next) {

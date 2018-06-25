@@ -6256,5 +6256,27 @@ h3.signin-title span {
     color: #cf0707;
 }
 
-.product-related-cell-price {
+/* Search */
+
+.search-area {
+    width: 40%;
+    min-width: 400px;
+}
+
+.search-form-right {
+    width: 45%;
+    display: inline-block;
+    float: right;
+}
+
+.search-form-left {
+    width: 45%;
+    display: inline-block;
+    float: left;
+}
+
+.search-area button {
+    width: 40%;
+    font-size: 1.2em;
+    margin: 15px auto;
 }

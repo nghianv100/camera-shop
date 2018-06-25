@@ -25,6 +25,11 @@ module.exports.loadBrands = function() {
     return db.executeQuery(sql);
 }
 
+module.exports.loadNations = function() {
+    var sql = `SELECT DISTINCT xuatxu FROM sanpham;`;
+    return db.executeQuery(sql);
+}
+
 module.exports.loadProduct = function(id) {
     var sql = `SELECT * FROM sanpham WHERE idsanpham = "${id}";`;
     return db.executeQuery(sql);

@@ -4,7 +4,7 @@ var accountDAO = require('../database/accountDAO');
 
 // Đã kiểm tra định dạng Email
 // Đã kiểm tra độ dài mật khẩu
-// Chưa kiểm tra mật khẩu trùng nhau
+// Đã kiểm tra mật khẩu trùng nhau
 // Chưa kiểm tra Email đã tồn tại hay chưa
 
 var router = express.Router();

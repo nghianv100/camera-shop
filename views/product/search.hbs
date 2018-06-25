@@ -1,0 +1,42 @@
+<link rel="stylesheet" href="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css">
+<div class="container search-area">
+    <h3 class="title">Tìm kiếm máy ảnh</h3>
+    <form action="/search/list" method="get">
+        <div class="form-group">
+            <label for="name">Tên máy:</label>
+            <input type="text" class="form-control" id="name" name="name">
+        </div>
+        <div class="form-group">
+            <label for="brand">Thương hiệu:</label>
+            <select class="form-control" id="brand" name="brand">
+                <option>Tất cả</option>
+                {{#each brands}}
+                <option>{{this.nhasanxuat}}</option>
+                {{/each}}
+            </select>
+        </div>
+        <div>
+            <div class="form-group search-form-left">
+                <label for="type">Loại máy:</label>
+                <select class="form-control" id="type" name="type">
+                    <option>Tất cả</option>
+                    {{#each types}}
+                    <option>{{this.loai}}</option>
+                    {{/each}}
+                </select>
+            </div>
+            <div class="form-group search-form-right">
+                <label for="nation">Xuất xứ:</label>
+                <select class="form-control" id="nation" name="nation">
+                    <option>Tất cả</option>
+                    {{#each nations}}
+                    <option>{{this.xuatxu}}</option>
+                    {{/each}}
+                </select>
+            </div>
+        </div>
+        <div style="text-align: center">
+            <button type="submit" class="btn btn-success">Tìm kiếm</button>
+        </div>
+    </form>
+</div>
