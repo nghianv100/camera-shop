@@ -7,7 +7,6 @@ router.get('/', function(req, res, next) {
     productDAO.loadBrands().then(_brands => {
         productDAO.loadTypes().then(_types => {
             productDAO.loadNations().then(_nations => {
-                console.log(_brands);
                 res.render('product/search', {
                     title: 'Tìm kiếm | CamShop',
                     brands: _brands,
@@ -17,6 +16,13 @@ router.get('/', function(req, res, next) {
             });
         });
     });
+});
+
+router.get('/list', function(req, res, next){
+    productDAO.searchBrand(req.query.brand, req.query.name, req.query.type, req.query.nation)
+    .then(result =>{
+        console.log(result);
+    })
 });
 
 module.exports = router;

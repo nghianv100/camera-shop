@@ -44,3 +44,40 @@ module.exports.loadProductRelatedBrand = function(brand, id) {
     var sql = `SELECT * FROM sanpham WHERE nhasanxuat = "${brand}" AND idsanpham != "${id}" LIMIT 5;`;
     return db.executeQuery(sql);
 }
+
+module.exports.searchBrand = function(brand, name, category, origin){
+    var sql;
+
+    if(name != '' ){
+        sql = `SELECT * FROM sanpham WHERE tensanpham like "%${name}%" `;
+        if (brand != 'all'){
+            sql += ` AND nhasanxuat = "${brand}" `;
+        }
+
+        if (category != 'all'){
+            sql += ` AND loai="${category}" `;
+        }
+
+        if (origin != 'all'){
+            sql += ` AND xuatxu="${origin}" `;
+        }
+    } else {
+        if (brand != 'all'){
+             sql = `SELECT * FROM sanpham WHERE nhasanxuat="${brand}"`;
+        }
+
+         if (category != 'all'){
+            sql += ` AND loai="${category}" `;
+        }
+
+        if (origin != 'all'){
+            sql += ` AND xuatxu="${origin}" `;
+        }
+
+        if (brand == 'all' && category == 'all' && origin == 'all'){
+            sql = `SELECT * FROM sanpham `;
+        }
+    }    
+    console.log(sql);
+    return db.executeQuery(sql);
+}

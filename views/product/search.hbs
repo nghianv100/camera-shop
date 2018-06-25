@@ -9,7 +9,7 @@
         <div class="form-group">
             <label for="brand">Thương hiệu:</label>
             <select class="form-control" id="brand" name="brand">
-                <option>Tất cả</option>
+                <option value="all">Tất cả</option>
                 {{#each brands}}
                 <option>{{this.nhasanxuat}}</option>
                 {{/each}}
@@ -19,7 +19,7 @@
             <div class="form-group search-form-left">
                 <label for="type">Loại máy:</label>
                 <select class="form-control" id="type" name="type">
-                    <option>Tất cả</option>
+                    <option value="all">Tất cả</option>
                     {{#each types}}
                     <option>{{this.loai}}</option>
                     {{/each}}
@@ -28,7 +28,7 @@
             <div class="form-group search-form-right">
                 <label for="nation">Xuất xứ:</label>
                 <select class="form-control" id="nation" name="nation">
-                    <option>Tất cả</option>
+                    <option value="all">Tất cả</option>
                     {{#each nations}}
                     <option>{{this.xuatxu}}</option>
                     {{/each}}
