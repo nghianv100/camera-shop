@@ -12,7 +12,7 @@ var router = express.Router();
 router.get('/', function(req, res, next) {
     res.render('login/signup', {
         title: 'Đăng ký | CamShop',
-    })
+    });
 });
 
 router.post('/', function(req, res, next) {
@@ -20,7 +20,7 @@ router.post('/', function(req, res, next) {
     var password = req.body.password;
     var passwordmd5 = md5(password);
     accountDAO.addAccount(email, passwordmd5).then(function(result) {
-        console.log(result);
+        res.redirect('/');
     })
 });
 

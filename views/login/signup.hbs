@@ -1,23 +1,24 @@
 <div class="container signin-area">
-    {{!-- <div class="alert alert-danger" role="alert">Email của bạn đã được đăng ký.</div> --}}
+    {{!--
+    <div class="alert alert-danger" role="alert">Email của bạn đã được đăng ký.</div> --}}
     <h3 class="signin-title">
         ĐĂNG KÝ
         <span>NGAY</span>
     </h3>
     <div class="modal-body modal-body-sub">
-        <form action="/signup" method="POST">
+        <form action="/signup" method="POST" id="signup_form">
             <div class="styled-input agile-styled-input-top">
                 <input required type="email" name="email">
                 <label>Email</label>
                 <span></span>
             </div>
             <div class="styled-input">
-                <input required type="password" name="password" minlength="8" maxlength="32">
+                <input required type="password" id="password" name="password" minlength="8" maxlength="32">
                 <label>Password</label>
                 <span></span>
             </div>
             <div class="styled-input">
-                <input required type="password" name="password_confirm" minlength="8" maxlength="32">
+                <input required type="password" id="password_confirm" name="password_confirm" minlength="8" maxlength="32">
                 <label>Confirm Password</label>
                 <span></span>
             </div>
@@ -30,3 +31,17 @@
         <div class="clearfix"></div>
     </div>
 </div>
+
+<script>
+    var password = document.getElementById('password'),
+        password_confirm = document.getElementById('password_confirm');
+    function validatePassword() {
+        if (password.value != password_confirm.value) {
+            password_confirm.setCustomValidity('Mật khẩu nhập lại không khớp');
+        } else {
+            password_confirm.setCustomValidity('');
+        }
+    }
+    password.onchange = validatePassword;
+    password_confirm.onkeyup = validatePassword;
+</script>
