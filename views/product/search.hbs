@@ -1,10 +1,17 @@
-<link rel="stylesheet" href="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css">
+﻿<link rel="stylesheet" href="/rsc/css/nouislider.min.css">
 <div class="container search-area">
     <h3 class="title">Tìm kiếm máy ảnh</h3>
-    <form action="/search/list" method="get">
+    <form action="/search/list" method="get" id="search_form">
         <div class="form-group">
             <label for="name">Tên máy:</label>
             <input type="text" class="form-control" id="name" name="name">
+        </div>
+        <div class="slider-area">
+            <label for="price-slider">Giá bán (VND):</label>
+            <div id="price-slider"></div>
+            <span id="price-lower-value">0</span>
+            <span id="price-upper-value">0</span>
+            <div class="clearfix"></div>
         </div>
         <div class="form-group">
             <label for="brand">Thương hiệu:</label>
@@ -36,7 +43,61 @@
             </div>
         </div>
         <div style="text-align: center">
-            <button type="submit" class="btn btn-success">Tìm kiếm</button>
+            <button type="submit" class="btn btn-success" id="submitbtn">Tìm kiếm</button>
         </div>
     </form>
 </div>
+<script src="/rsc/js/nouislider.min.js"></script>
+<script src="/rsc/js/wNumb.js"></script>
+<script>
+    var slider = document.getElementById('price-slider');
+    var nodes = [
+        document.getElementById('price-lower-value'),
+        document.getElementById('price-upper-value')
+    ];
+
+    noUiSlider.create(slider, {
+        connect: true,
+        behaviour: 'tap',
+        start: [0, 100000000],
+        step: 5000000,
+        range: {
+            'min': [0],
+            'max': [100000000]
+        },
+        format: wNumb({
+            decimals: 0,
+        })
+    });
+
+    slider.noUiSlider.on('update', function (values, handle, unencoded, isTap, positions) {
+        nodes[handle].innerHTML = formatPrice(values[handle]);
+    });
+
+    $('#search_form').submit(function (eventObject) {
+        var minPrice = slider.noUiSlider.get()[0];
+        var maxPrice = slider.noUiSlider.get()[1];
+        console.log(minPrice, maxPrice);
+        $('<input>').attr('type', 'hidden')
+            .attr('name', 'min_price').val(minPrice)
+            .appendTo(this);
+        $('<input>').attr('type', 'hidden')
+            .attr('name', 'max_price').val(maxPrice)
+            .appendTo(this);
+        return true;
+    });
+
+    function formatPrice(strInput) {
+        var result = '';
+        var sub;
+        var inputLength = strInput.length;
+        while (inputLength > 3) {
+            sub = '.' + strInput.slice(inputLength - 3, inputLength);
+            inputLength = inputLength - 3;
+            result = sub.concat(result);
+        }
+        sub = strInput.slice(0, inputLength);
+        result = sub.concat(result);
+        return result;
+    }
+</script>

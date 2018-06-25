@@ -6280,3 +6280,19 @@ h3.signin-title span {
     font-size: 1.2em;
     margin: 15px auto;
 }
+
+.slider-area {
+    margin: 20px 0 15px 0;
+}
+
+#price-slider {
+    margin: 15px 0;
+}
+
+#price-lower-value {
+    float: left;
+}
+
+#price-upper-value {
+    float: right;
+}
