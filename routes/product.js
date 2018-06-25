@@ -1,31 +1,15 @@
 var express = require('express');
 var productDAO = require('../database/productDAO');
-var priceFormat = require('../utils/price_format');
-var switcher = require('../utils/switchCode');
+var priceFormat = require('../utils/priceFormat');
+var ProductDetail = require('../utils/ProductDetail');
 
 var router = express.Router();
 
 router.all('/:productID', function (req, res, next) {
     var productID = req.params.productID;
     productDAO.loadProduct(productID).then(result => {
-        console.log(result);
-        var info = {};
-
-        info.id = result[0].idsanpham;
-        info.name = result[0].tensanpham;
-        info.price = result[0].gia;
-        info.price_f = priceFormat(result[0].gia);
-        info.brand = result[0].nhasanxuat;
-        info.nation = result[0].xuatxu;
-        info.nation_f = switcher.codeToNation(result[0].xuatxu);
-        info.type = result[0].loai;
-        info.type_f = switcher.codeToType(result[0].loai);
-        info.nviews = result[0].luotxem;
-        info.nsold = result[0].luotban;
-        info.detail = result[0].mota;
-        info.img = result[0].img;
-        info.date = result[0].ngaytiepnhan;
-
+        var info = new ProductDetail(result[0]);
+        
         productDAO.loadProductRelatedType(info.type, info.id).then(typeList => {
             productDAO.loadProductRelatedBrand(info.brand, info.id).then(brandList => {
                 for(let k = 0; k < typeList.length; k++) {

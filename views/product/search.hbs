@@ -79,10 +79,10 @@
         var maxPrice = slider.noUiSlider.get()[1];
         console.log(minPrice, maxPrice);
         $('<input>').attr('type', 'hidden')
-            .attr('name', 'min_price').val(minPrice)
+            .attr('name', 'min').val(minPrice)
             .appendTo(this);
         $('<input>').attr('type', 'hidden')
-            .attr('name', 'max_price').val(maxPrice)
+            .attr('name', 'max').val(maxPrice)
             .appendTo(this);
         return true;
     });

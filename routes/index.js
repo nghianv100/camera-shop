@@ -1,6 +1,6 @@
 var express = require('express');
 var productDAO = require('../database/productDAO');
-var priceFormat = require('../utils/price_format');
+var priceFormat = require('../utils/priceFormat');
 
 var router = express.Router();
 

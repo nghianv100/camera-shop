@@ -5,32 +5,32 @@ module.exports.load10Newest = function () {
     return db.executeQuery(sql);
 }
 
-module.exports.load10BestSell = function() {
+module.exports.load10BestSell = function () {
     var sql = `SELECT * FROM sanpham ORDER BY luotban DESC LIMIT 10;`;
     return db.executeQuery(sql);
 }
 
-module.exports.load10MostViews = function() {
+module.exports.load10MostViews = function () {
     var sql = `SELECT * FROM sanpham ORDER BY luotxem DESC LIMIT 10;`;
     return db.executeQuery(sql);
 }
 
-module.exports.loadTypes = function() {
+module.exports.loadTypes = function () {
     var sql = `SELECT DISTINCT loai FROM sanpham;`
     return db.executeQuery(sql);
 }
 
-module.exports.loadBrands = function() {
+module.exports.loadBrands = function () {
     var sql = `SELECT DISTINCT nhasanxuat FROM sanpham;`;
     return db.executeQuery(sql);
 }
 
-module.exports.loadNations = function() {
+module.exports.loadNations = function () {
     var sql = `SELECT DISTINCT xuatxu FROM sanpham;`;
     return db.executeQuery(sql);
 }
 
-module.exports.loadProduct = function(id) {
+module.exports.loadProduct = function (id) {
     var sql = `SELECT * FROM sanpham WHERE idsanpham = "${id}";`;
     return db.executeQuery(sql);
 }
@@ -40,44 +40,42 @@ module.exports.loadProductRelatedType = function (type, id) {
     return db.executeQuery(sql);
 }
 
-module.exports.loadProductRelatedBrand = function(brand, id) {
+module.exports.loadProductRelatedBrand = function (brand, id) {
     var sql = `SELECT * FROM sanpham WHERE nhasanxuat = "${brand}" AND idsanpham != "${id}" LIMIT 5;`;
     return db.executeQuery(sql);
 }
 
-module.exports.searchBrand = function(brand, name, category, origin){
+module.exports.searchProduct = function (name, brand, type, nation, min, max) {
     var sql;
+    if (name != '') {
+        sql = `SELECT * FROM sanpham WHERE tensanpham like "%${name}%" AND gia > ${min} AND gia < ${max} `;
 
-    if(name != '' ){
-        sql = `SELECT * FROM sanpham WHERE tensanpham like "%${name}%" `;
-        if (brand != 'all'){
+        if (brand != 'all') {
             sql += ` AND nhasanxuat = "${brand}" `;
         }
 
-        if (category != 'all'){
-            sql += ` AND loai="${category}" `;
+        if (type != 'all') {
+            sql += ` AND loai="${type}" `;
         }
 
-        if (origin != 'all'){
-            sql += ` AND xuatxu="${origin}" `;
+        if (nation != 'all') {
+            sql += ` AND xuatxu="${nation}" `;
         }
     } else {
-        if (brand != 'all'){
-             sql = `SELECT * FROM sanpham WHERE nhasanxuat="${brand}"`;
+        sql = `SELECT * FROM sanpham WHERE gia > ${min} AND gia < ${max} `;
+
+        if (brand != 'all') {
+            sql += ` AND nhasanxuat="${brand}" `;
         }
 
-         if (category != 'all'){
-            sql += ` AND loai="${category}" `;
+        if (type != 'all') {
+            sql += ` AND loai="${type}" `;
         }
 
-        if (origin != 'all'){
-            sql += ` AND xuatxu="${origin}" `;
+        if (nation != 'all') {
+            sql += ` AND xuatxu="${nation}" `;
         }
-
-        if (brand == 'all' && category == 'all' && origin == 'all'){
-            sql = `SELECT * FROM sanpham `;
-        }
-    }    
+    }
     console.log(sql);
     return db.executeQuery(sql);
 }
