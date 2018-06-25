@@ -112,15 +112,15 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                   <ul class="dropdown-menu multi-column columns-3">
                     <div class="agile_inner_drop_nav_info">
                       <div class="col-sm-6 multi-gd-img1 multi-gd-text ">
-                        <a href="mens.html">
+                        <a href="/search">
                           <img src="/rsc/img/example1.jpg" alt=" " />
                         </a>
                       </div>
                       <div class="col-sm-6 multi-gd-img">
                         <ul class="multi-column-dropdown">
-                          {{#each layoutVM.types}}
+                          {{#each layoutVM.typesList}}
                           <li>
-                            <a href="mens.html">{{this}}</a>
+                            <a href="/search/list?type={{this.loai}}">{{this.loai_f}}</a>
                           </li>
                           {{/each}}
                         </ul>
@@ -137,15 +137,15 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                     <div class="agile_inner_drop_nav_info">
                       <div class="col-sm-6 multi-gd-img">
                         <ul class="multi-column-dropdown">
-                          {{#each layoutVM.brands}}
+                          {{#each layoutVM.brandsList}}
                           <li>
-                            <a href="womens.html">{{this}}</a>
+                            <a href="/search/list?brand={{this.nhasanxuat}}">{{this.nhasanxuat_f}}</a>
                           </li>
                           {{/each}}
                         </ul>
                       </div>
                       <div class="col-sm-6 multi-gd-img multi-gd-text ">
-                        <a href="womens.html">
+                        <a href="/search">
                           <img src="/rsc/img/example2.jpg" alt=" " />
                         </a>
                       </div>

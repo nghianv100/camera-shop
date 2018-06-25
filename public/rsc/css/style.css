@@ -6296,3 +6296,15 @@ h3.signin-title span {
 #price-upper-value {
     float: right;
 }
+
+p.amount-product {
+    color: darkblue;
+    font-size: 1.2em;
+    font-weight: bold;
+    padding-right: 15px;
+    padding-left: 15px;
+}
+
+p.amount-product span {
+    color: darkred;
+}

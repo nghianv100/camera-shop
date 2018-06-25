@@ -28,7 +28,8 @@ router.get('/list', function(req, res, next){
         }
         res.render('product/list', {
             title: 'Kết quả tìm kiếm | CamShop', 
-            products: result
+            products: result,
+            amount: result.length
         })
     })
 });
