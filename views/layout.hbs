@@ -16,8 +16,8 @@ License URL: http://creativecommons.org/licenses/by/3.0/
   <link href="/rsc/css/easy-responsive-tabs.css" rel='stylesheet' type='text/css' />
   <link href="/rsc/css/style.css" rel="stylesheet" type="text/css" media="all" />
   <script src="/rsc/js/jquery-3.3.1.min.js"></script>
-  <script src="/rsc/js/bootstrap.js"></script>
-  {{!-- <script type="application/x-javascript">
+  <script src="/rsc/js/bootstrap.js"></script> {{!--
+  <script type="application/x-javascript">
 		addEventListener("load", function () {
 			setTimeout(function() {
         window.scrollTo(0, 1);
@@ -70,12 +70,22 @@ License URL: http://creativecommons.org/licenses/by/3.0/
       </div>
       <!-- User -->
       <div class="header-user">
-        <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
-        <div class="user">
-          <small>Xin chào,</small>
-          <br>
-          <b>Nguyễn Văn Nghĩa</b>
+        {{#if isLogged}}
+        <div style="cursor: pointer">
+          <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+          <div class="user">
+            <small>Xin chào,</small>
+            <br>
+            <b>Nguyễn Văn Nghĩa</b>
+          </div>
         </div>
+        {{else}}
+        <a href="/signin">
+          <div class="header-not-user">
+            <p>Đăng nhập <span class="glyphicon glyphicon-log-in"></span></p>
+          </div>
+        </a>
+        {{/if}}
       </div>
     </div>
   </div>
@@ -175,9 +185,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
       <div class="clearfix"></div>
     </div>
   </div>
-  {{!-- Template --}}
-  {{{body}}}
-  {{!-- Footer --}}
+  {{!-- Template --}} {{{body}}} {{!-- Footer --}}
   <div class="footer">
     <div class="coupons coupons-grids text-center">
       <div class="w3layouts_mail_grid">

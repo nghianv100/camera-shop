@@ -135,6 +135,14 @@ label {
     text-align: right;
 }
 
+.header-not-user {
+    padding-top: 15px;
+    font-size: 1.4em;
+    font-weight: bold;
+    text-align: right;
+    color: darkslateblue;
+}
+
 /* navigation */
 
 .ban-top {
