@@ -6,6 +6,7 @@ var router = express.Router();
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
+  console.log(req.session);
   productDAO.load10Newest()
   .then(list10Newest => {
     productDAO.load10BestSell()

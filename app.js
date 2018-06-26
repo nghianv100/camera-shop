@@ -6,22 +6,32 @@
 var createError = require('http-errors');
 var express = require('express');
 var path = require('path');
-var session = require('express-session');
 var bodyParser = require('body-parser');
 var logger = require('morgan');
+var session = require('express-session');
+var database = require('./database/db');
 var handleLayout = require('./middlewares/handleLayout');
 
 // Khai báo các Controller
 var indexRouter = require('./routes/index'),
-    signinRouter = require('./routes/signin'),
-    signupRouter = require('./routes/signup'),
-    productRouter = require('./routes/product'),
-    searchRouter = require('./routes/search'),
-    contactRouter = require('./routes/contact'),
-    updateinfoRouter= require('./routes/updateinfo'),
-    dashboardRouter= require('./routes/dashboard');
+  signinRouter = require('./routes/signin'),
+  signupRouter = require('./routes/signup'),
+  productRouter = require('./routes/product'),
+  searchRouter = require('./routes/search'),
+  contactRouter = require('./routes/contact'),
+  updateinfoRouter = require('./routes/updateinfo'),
+  dashboardRouter = require('./routes/dashboard');
 
 var app = express();
+
+// Sessions manager
+app.use(session({
+  key: 'session_cookie_name',
+  secret: 'PTUDW2015',
+  store: database.sessions.getSessionStore(),
+  resave: false,
+  saveUninitialized: false
+}));
 
 // Cài đặt view engine
 app.set('views', path.join(__dirname, 'views'));
@@ -32,15 +42,6 @@ app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({
   extended: false
-}));
-app.set('trust proxy', 1);
-app.use(session({
-  secret: 'PTUDW2015',
-  resave: false,
-  saveUninitialized: false,
-  cookie: {
-    secure: true
-  }
 }));
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(handleLayout);
