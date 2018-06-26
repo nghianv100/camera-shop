@@ -1,12 +1,14 @@
 var express = require('express');
 var productDAO = require('../database/productDAO');
-var priceFormat = require('../utils/priceFormat');
+var priceFormat = require('../utils/price-format');
 
 var router = express.Router();
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
+  console.log('----- Current Session -----')
   console.log(req.session);
+  console.log('---------------------------');
   productDAO.load10Newest()
   .then(list10Newest => {
     productDAO.load10BestSell()

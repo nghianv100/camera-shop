@@ -1,6 +1,6 @@
 var express = require('express');
 var productDAO = require('../database/productDAO');
-var priceFormat = require('../utils/priceFormat');
+var priceFormat = require('../utils/price-format');
 
 // Chua kiem tra page number
 

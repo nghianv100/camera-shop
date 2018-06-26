@@ -1,10 +1,13 @@
 <div class="container signin-area">
+    {{#if signin_fail}}
+        <div class="alert alert-danger" role="alert">{{signin_msg}}</div>
+    {{/if}}
     <h3 class="signin-title">
         ĐĂNG NHẬP
         <span>NGAY</span>
     </h3>
     <div class="modal-body modal-body-sub">
-        <form action="/signin" method="post">
+        <form action="/signin" method="POST">
             <div class="styled-input agile-styled-input-top">
                 <input type="text" name="email" required="">
                 <label>Email</label>

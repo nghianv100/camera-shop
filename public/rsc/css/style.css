@@ -115,10 +115,9 @@ label {
 }
 
 .header-user {
-    display: inline-block;
+    display: inline;
     float: right;
     padding-right: 60px;
-    width: 55%;
 }
 
 .header-user span.glyphicon-user {
@@ -136,11 +135,13 @@ label {
 }
 
 .header-not-user {
+    display: inline;
+    float: right;
+    padding-right: 60px;
     padding-top: 15px;
-    font-size: 1.4em;
+    font-size: 1.3em;
     font-weight: bold;
-    text-align: right;
-    color: darkslateblue;
+    color: black;
 }
 
 /* navigation */

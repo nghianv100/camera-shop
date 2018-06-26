@@ -1,5 +1,5 @@
-var priceFormat = require('./priceFormat');
-var switcher = require('./switchCode');
+var priceFormat = require('./price-format');
+var switcher = require('./switch-code');
 
 module.exports = function ProductDetail(product) {
     this.id = product.idsanpham;

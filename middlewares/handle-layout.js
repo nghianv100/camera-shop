@@ -1,5 +1,5 @@
 var productDAO = require('../database/productDAO');
-var switcher = require('../utils/switchCode')
+var switcher = require('../utils/switch-code')
 
 module.exports = function (req, res, next) {
     productDAO.loadTypes().then(rowsTypes => {
@@ -14,7 +14,9 @@ module.exports = function (req, res, next) {
 
             res.locals.layoutVM = {
                 typesList: rowsTypes,
-                brandsList: rowsBrands
+                brandsList: rowsBrands,
+                isLogged: req.session.isLogged,
+                user: req.session.user
             }
 
             next();

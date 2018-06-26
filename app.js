@@ -10,7 +10,7 @@ var bodyParser = require('body-parser');
 var logger = require('morgan');
 var session = require('express-session');
 var database = require('./database/db');
-var handleLayout = require('./middlewares/handleLayout');
+var handleLayout = require('./middlewares/handle-layout');
 
 // Khai báo các Controller
 var indexRouter = require('./routes/index'),
