@@ -1,23 +1,23 @@
 // CƠ SỞ DỮ LIỆU DÙNG TIẾNG VIỆT:
-      // sanpham: idsanpham, gia, loai, luotxem, luotban, mota, xuatxu, nhasanxuat, img, tensanpham, ngaytiepnhan
-      // taikhoan: email, matkhau, hoten, sdt, admin
+// sanpham: idsanpham, gia, loai, luotxem, luotban, mota, xuatxu, nhasanxuat, img, tensanpham, ngaytiepnhan
+// taikhoan: email, matkhau, hoten, sdt, admin
 
 // Khai báo các module cần sử dụng
 var createError = require('http-errors');
 var express = require('express');
 var path = require('path');
-var cookieParser = require('cookie-parser');
+var session = require('express-session');
 var bodyParser = require('body-parser');
 var logger = require('morgan');
 var handleLayout = require('./middlewares/handleLayout');
 
 // Khai báo các Controller
 var indexRouter = require('./routes/index'),
-    signinRouter = require('./routes/signin'),
-    signupRouter = require('./routes/signup'),
-    productRouter = require('./routes/product'),
-    searchRouter = require('./routes/search'),
-    contactRouter = require('./routes/contact');
+  signinRouter = require('./routes/signin'),
+  signupRouter = require('./routes/signup'),
+  productRouter = require('./routes/product'),
+  searchRouter = require('./routes/search'),
+  contactRouter = require('./routes/contact');
 
 var app = express();
 
@@ -28,14 +28,24 @@ app.set('view engine', 'hbs');
 // Cài đặt các middlewares
 app.use(logger('dev'));
 app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
-app.use(cookieParser());
+app.use(express.urlencoded({
+  extended: false
+}));
+app.set('trust proxy', 1);
+app.use(session({
+  secret: 'PTUDW2015',
+  resave: false,
+  saveUninitialized: false,
+  cookie: {
+    secure: true
+  }
+}));
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(handleLayout);
 
 // Chuyển tiếp cho các Controller xử lý
 app.use('/', indexRouter);
-app.get('/home', function(req, res) {
+app.get('/home', function (req, res) {
   res.redirect('/');
 })
 app.use('/signin', signinRouter);
@@ -45,12 +55,12 @@ app.use('/search', searchRouter);
 app.use('/contact', contactRouter);
 
 // Bắt lỗi
-app.use(function(req, res, next) {
+app.use(function (req, res, next) {
   next(createError(404));
 });
 
 // Xử lý lỗi
-app.use(function(err, req, res, next) {
+app.use(function (err, req, res, next) {
   // set locals, only providing error in development
   res.locals.message = err.message;
   res.locals.error = req.app.get('env') === 'development' ? err : {};
