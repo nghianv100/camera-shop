@@ -2,6 +2,8 @@ var express = require('express');
 var productDAO = require('../database/productDAO');
 var priceFormat = require('../utils/priceFormat');
 
+// Chua kiem tra page number
+
 var router = express();
 
 router.get('/', function(req, res, next) {
@@ -21,7 +23,8 @@ router.get('/', function(req, res, next) {
 
 router.get('/list', function(req, res, next){
     var params = req.query;
-    productDAO.searchProduct(params.name, params.brand, params.type, params.nation, params.min, params.max)
+    console.log(params);
+    productDAO.searchProduct(params.name, params.brand, params.type, params.nation, params.min, params.max, params.page)
     .then(result => {
         for(var i = 0; i < result.length; i++) {
             result[i].gia_f = priceFormat(result[i].gia);
