@@ -17,7 +17,8 @@ var indexRouter = require('./routes/index'),
     signupRouter = require('./routes/signup'),
     productRouter = require('./routes/product'),
     searchRouter = require('./routes/search'),
-    contactRouter = require('./routes/contact');
+    contactRouter = require('./routes/contact'),
+    dashboardRouter= require('./routes/dashboard');
 
 var app = express();
 
@@ -43,6 +44,7 @@ app.use('/signup', signupRouter);
 app.use('/product', productRouter);
 app.use('/search', searchRouter);
 app.use('/contact', contactRouter);
+app.use('/dashboard', dashboardRouter);
 
 // Bắt lỗi
 app.use(function(req, res, next) {
