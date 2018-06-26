@@ -31,16 +31,17 @@ License URL: http://creativecommons.org/licenses/by/3.0/
   <div class="header-bar container-fluid" id="home">
     <ul>
       <li>
-        <a href="/signin">
-          {{#if layoutVM.isLogged}}
+        {{#if layoutVM.isLogged}}
+        <a href="/account">
           <i class="fa fa-user-circle-o"></i> {{layoutVM.user.hoten}}</a>
         {{else}}
-        <i class="fa fa-unlock-alt"></i> Đăng nhập</a>
+        <a href="/signin">
+          <i class="fa fa-unlock-alt"></i> Đăng nhập</a>
         {{/if}}
       </li>
       <li>
         {{#if layoutVM.isLogged}}
-        <a href="/signup">
+        <a href="/account/order">
           <i class="fa fa-cart-arrow-down"></i> Xem đơn hàng</a>
         {{else}}
         <a href="/signup">
@@ -85,18 +86,18 @@ License URL: http://creativecommons.org/licenses/by/3.0/
           <div class="user">
             <small>Xin chào,</small>
             <br>
-            <b>Nguyen Van Nghia</b>
+            <b>{{layoutVM.user.hoten}}</b>
           </div>
         </div>
         <ul class="dropdown-menu">
           <li>
-            <a href="#">Cập nhật thông tin</a>
+            <a href="/account">Cập nhật thông tin</a>
           </li>
           <li>
-            <a href="#">Đổi mật khẩu</a>
+            <a href="/account/password">Đổi mật khẩu</a>
           </li>
           <li>
-            <a href="#">Xem đơn hàng</a>
+            <a href="/account/order">Xem đơn hàng</a>
           </li>
           <li role="separator" class="divider"></li>
           <li>

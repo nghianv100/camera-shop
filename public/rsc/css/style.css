@@ -6328,3 +6328,61 @@ p.amount-product {
 p.amount-product span {
     color: darkred;
 }
+
+.account-manager {
+    padding: 20px;
+    text-align: center;
+}
+
+.account-manager a {
+    padding: 0;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    font-size: 1.2em;
+    font-weight: bold;
+}
+.account-manager a:hover {
+    text-decoration: none;
+}
+
+.account-manager li.selected {
+    color: darkred;
+}
+
+.account-update-info {
+    background-color: rgba(130, 180, 255, 0.17);
+    border-radius: 12px;
+    padding: 30px;
+}
+
+.account-password {
+    background-color: rgba(158, 137, 92, 0.17);
+    border-radius: 12px;
+    padding: 30px;
+}
+
+.account-update-info h4,
+.account-password h4 {
+    font-size: 1.5em;
+    font-weight: bold;
+    color: darkblue;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.account-update-info form {
+    margin: 0 auto;
+    width: 60%;
+    min-width: 300px;
+}
+
+.account-password form {
+    margin: 0 auto;
+    width: 40%;
+    min-width: 300px;
+}
+
+.account-update-info form button,
+.account-password form button {
+    width: 120px;
+}

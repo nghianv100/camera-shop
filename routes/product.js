@@ -10,7 +10,6 @@ router.all('/:productID', function (req, res, next) {
     productDAO.increaseViews(productID).then();
     productDAO.loadProduct(productID).then(result => {
         var info = new ProductDetail(result[0]);
-        info.nviews++;
         productDAO.loadProductRelatedType(info.type, info.id).then(typeList => {
             productDAO.loadProductRelatedBrand(info.brand, info.id).then(brandList => {
                 for(let k = 0; k < typeList.length; k++) {
