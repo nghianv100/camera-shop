@@ -1,11 +1,42 @@
 <div class="container">
 	<div class="row">
 		<div class="col-md-4 products-left">
-			{{!-- PHNhat --}}
+			<div class="css-treeview">
+				<h4>THÔNG TIN TÌM KIẾM</h4>
+				<ul class="tree-list-pad">
+					<li >
+
+						<label for="item-0"  style="cursor: default;">TÊN SẢN PHẨM</label>
+						<div style="margin-left:45px"> Canon</div>
+							
+					</li>
+					<li>
+
+						<label for="item-0"  style="cursor: default;">MỨC GIÁ</label>
+						<div style="margin-left:45px"> 12.000.000- 50.000.000</div>
+					</li>
+					<li>
+
+						<label for="item-1"  style="cursor: default;">THƯƠNG HIỆU</label>
+						<div style="margin-left:45px"> Kodak</div>
+					</li>
+					<li>
+
+						<label for="item-2" style="cursor: default;">LOẠI SẢN PHẨM</label>
+						<div style="margin-left:45px"> pornhub.com</div>
+					</li>
+					<li>
+
+						<label for="item-2" style="cursor: default;">XUẤT XỨ</label>
+						<div style="margin-left:45px"> Yamateeee</div>
+					</li>
+				</ul>
+			</div>
 			<div class="clearfix"></div>
 		</div>
 		<div class="col-md-8 products-right">
-			<p class="amount-product">Tìm được <span>{{amount}}</span> sản phẩm.</p>
+			<p class="amount-product">Tìm được
+				<span>{{amount}}</span> sản phẩm.</p>
 			{{#each products}}
 			<div class="col-md-6 product-cell">
 				<div class="men-pro-item simpleCart_shelfItem">
