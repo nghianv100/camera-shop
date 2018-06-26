@@ -6,7 +6,7 @@ module.exports.executeQuery = function (query) {
             host: 'localhost',
             port: 3306,
             user: 'root',
-            password: 'laluto123',
+            password: '+nguyentanphat13495+',
             database: 'camera_shop'
         });
 
