@@ -5,6 +5,7 @@ var path = require('path');
 var logger = require('morgan');
 var session = require('express-session');
 
+var restrict = require('./middlewares/restrict');
 var database = require('./database/db');
 var handleLayout = require('./middlewares/handle-layout');
 

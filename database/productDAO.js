@@ -45,17 +45,17 @@ module.exports.loadProductRelatedBrand = function (brand, id) {
     return db.executeQuery(sql);
 }
 
-module.exports.searchProduct = function (name, brand, type, nation, min, max, page) {
+module.exports.searchProduct = function (name, brand, type, nation, min, max) {
     var sql;
     var _min, _max;
 
-    if(min == undefined){
+    if (min == undefined) {
         _min = 0;
     } else {
         _min = min;
     }
 
-    if(max == undefined) {
+    if (max == undefined) {
         _max = 100000000;
     } else {
         _max = max;
@@ -91,18 +91,65 @@ module.exports.searchProduct = function (name, brand, type, nation, min, max, pa
         }
     }
 
-    page = parseInt(page);
-    var pageNumber = parseInt((4 * (page - 1)));
-    if (page == 1 || page < 1 || page== undefined){
-        sql += ` LIMIT 4; `;
-    } else if (page > 1){
-        sql += ` LIMIT 4 OFFSET ${pageNumber}; `;
-    }
-    console.log(sql);
     return db.executeQuery(sql);
 }
 
-module.exports.increaseViews = function(id) {
+module.exports.searchProductPag = function (name, brand, type, nation, min, max, page) {
+    var sql;
+    var _min, _max;
+
+    if (min == undefined) {
+        _min = 0;
+    } else {
+        _min = min;
+    }
+
+    if (max == undefined) {
+        _max = 100000000;
+    } else {
+        _max = max;
+    }
+
+    if (name != '' && name != undefined) {
+        sql = `SELECT * FROM sanpham WHERE tensanpham like "%${name}%" AND gia > ${_min} AND gia < ${_max} `;
+
+        if (brand != 'all' && brand != undefined) {
+            sql += ` AND nhasanxuat = "${brand}" `;
+        }
+
+        if (type != 'all' && type != undefined) {
+            sql += ` AND loai="${type}" `;
+        }
+
+        if (nation != 'all' && nation != undefined) {
+            sql += ` AND xuatxu="${nation}" `;
+        }
+    } else {
+        sql = `SELECT * FROM sanpham WHERE gia > ${_min} AND gia < ${_max} `;
+
+        if (brand != 'all' && brand != undefined) {
+            sql += ` AND nhasanxuat="${brand}" `;
+        }
+
+        if (type != 'all' && type != undefined) {
+            sql += ` AND loai="${type}" `;
+        }
+
+        if (nation != 'all' && nation != undefined) {
+            sql += ` AND xuatxu="${nation}" `;
+        }
+    }
+
+    var n = parseInt(page);
+
+    var pageNumber = 4 * (n - 1);
+
+    sql += ` LIMIT 4 OFFSET ${pageNumber}; `;
+
+    return db.executeQuery(sql);
+}
+
+module.exports.increaseViews = function (id) {
     var sql = `UPDATE sanpham SET luotxem = luotxem + 1 WHERE idsanpham = "${id}";`
     return db.executeQuery(sql);
 }
