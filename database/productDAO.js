@@ -45,7 +45,7 @@ module.exports.loadProductRelatedBrand = function (brand, id) {
     return db.executeQuery(sql);
 }
 
-module.exports.searchProduct = function (name, brand, type, nation, min, max) {
+module.exports.searchProduct = function (name, brand, type, nation, min, max, page) {
     var sql;
     var _min, _max;
 
@@ -90,7 +90,15 @@ module.exports.searchProduct = function (name, brand, type, nation, min, max) {
             sql += ` AND xuatxu="${nation}" `;
         }
     }
-    
+
+    page = parseInt(page);
+    var pageNumber = parseInt((4 * (page - 1)));
+    if (page == 1 || page < 1 || page== undefined){
+        sql += ` LIMIT 4; `;
+    } else if (page > 1){
+        sql += ` LIMIT 4 OFFSET ${pageNumber}; `;
+    }
+    console.log(sql);
     return db.executeQuery(sql);
 }
 
