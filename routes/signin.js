@@ -10,8 +10,12 @@ router.get('/', function (req, res, next) {
         signin_fail: req.session.signin_fail,
         signin_msg: req.session.signin_msg
     });
-    delete req.session.signin_fail;
-    delete req.session.signin_msg;
+    if (req.session.signin_fail != undefined) {
+        delete req.session.signin_fail;
+    }
+    if (req.session.signin_msg != undefined) {
+        delete req.session.signin_msg;
+    }
 });
 
 router.post('/', function (req, res, next) {
@@ -30,7 +34,14 @@ router.post('/', function (req, res, next) {
             } else {
                 req.session.isLogged = true;
                 req.session.user = result[0];
-                res.redirect('/');
+                req.session.cart = [];
+
+                var url = '/';
+                if(req.query.retUrl) {
+                    url = req.query.retUrl;
+                }
+                
+                res.redirect(url);
             }
         }
     });

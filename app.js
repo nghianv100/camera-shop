@@ -1,14 +1,10 @@
-// CƠ SỞ DỮ LIỆU DÙNG TIẾNG VIỆT:
-// sanpham: idsanpham, gia, loai, luotxem, luotban, mota, xuatxu, nhasanxuat, img, tensanpham, ngaytiepnhan
-// taikhoan: email, matkhau, hoten, sdt, admin
-
 // Khai báo các module cần sử dụng
 var createError = require('http-errors');
 var express = require('express');
 var path = require('path');
-var bodyParser = require('body-parser');
 var logger = require('morgan');
 var session = require('express-session');
+
 var database = require('./database/db');
 var handleLayout = require('./middlewares/handle-layout');
 
@@ -16,6 +12,7 @@ var handleLayout = require('./middlewares/handle-layout');
 var indexRouter = require('./routes/index'),
   signinRouter = require('./routes/signin'),
   signupRouter = require('./routes/signup'),
+  signoutRouter = require('./routes/signout'),
   productRouter = require('./routes/product'),
   searchRouter = require('./routes/search'),
   contactRouter = require('./routes/contact'),
@@ -53,6 +50,7 @@ app.get('/home', function (req, res) {
 })
 app.use('/signin', signinRouter);
 app.use('/signup', signupRouter);
+app.use('/signout', signoutRouter);
 app.use('/product', productRouter);
 app.use('/search', searchRouter);
 app.use('/contact', contactRouter);

@@ -32,16 +32,16 @@ License URL: http://creativecommons.org/licenses/by/3.0/
     <ul>
       <li>
         <a href="/signin">
-        {{#if layoutVM.isLogged}}
+          {{#if layoutVM.isLogged}}
           <i class="fa fa-user-circle-o"></i> {{layoutVM.user.hoten}}</a>
         {{else}}
-          <i class="fa fa-unlock-alt"></i> Đăng nhập</a>
+        <i class="fa fa-unlock-alt"></i> Đăng nhập</a>
         {{/if}}
       </li>
       <li>
         {{#if layoutVM.isLogged}}
         <a href="/signup">
-          <i class="fa fa-sign-out"></i> Đăng xuất</a>
+          <i class="fa fa-cart-arrow-down"></i> Xem đơn hàng</a>
         {{else}}
         <a href="/signup">
           <i class="fa fa-pencil-square-o"></i> Đăng ký</a>
@@ -100,7 +100,9 @@ License URL: http://creativecommons.org/licenses/by/3.0/
           </li>
           <li role="separator" class="divider"></li>
           <li>
-            <a href="#">Đăng xuất</a>
+            <form action="/signout" method="POST">
+              <input type="submit" value="Đăng xuất">
+            </form>
           </li>
         </ul>
       </div>

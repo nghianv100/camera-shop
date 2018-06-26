@@ -134,6 +134,17 @@ label {
     text-align: right;
 }
 
+.header-user .dropdown-menu form {
+    text-align: center;
+}
+
+.header-user .dropdown-menu form>input{
+    border: none;
+    background-color: white;
+    font-size: 1.2em;
+    color: red;
+}
+
 .header-not-user {
     display: inline;
     float: right;
