@@ -16,8 +16,8 @@ License URL: http://creativecommons.org/licenses/by/3.0/
   <link href="/rsc/css/easy-responsive-tabs.css" rel='stylesheet' type='text/css' />
   <link href="/rsc/css/style.css" rel="stylesheet" type="text/css" media="all" />
   <script src="/rsc/js/jquery-3.3.1.min.js"></script>
-  <script src="/rsc/js/bootstrap.js"></script>
-  {{!-- <script type="application/x-javascript">
+  <script src="/rsc/js/bootstrap.js"></script> {{!--
+  <script type="application/x-javascript">
 		addEventListener("load", function () {
 			setTimeout(function() {
         window.scrollTo(0, 1);
@@ -32,11 +32,20 @@ License URL: http://creativecommons.org/licenses/by/3.0/
     <ul>
       <li>
         <a href="/signin">
-          <i class="fa fa-unlock-alt"></i> Đăng nhập</a>
+          {{#if layoutVM.isLogged}}
+          <i class="fa fa-user-circle-o"></i> {{layoutVM.user.hoten}}</a>
+        {{else}}
+        <i class="fa fa-unlock-alt"></i> Đăng nhập</a>
+        {{/if}}
       </li>
       <li>
+        {{#if layoutVM.isLogged}}
+        <a href="/signup">
+          <i class="fa fa-cart-arrow-down"></i> Xem đơn hàng</a>
+        {{else}}
         <a href="/signup">
           <i class="fa fa-pencil-square-o"></i> Đăng ký</a>
+        {{/if}}
       </li>
       <li>
         <i class="fa fa-phone"></i>0972 347 190</li>
@@ -69,15 +78,45 @@ License URL: http://creativecommons.org/licenses/by/3.0/
         </form>
       </div>
       <!-- User -->
-      <div class="header-user">
-        <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
-        <div class="user">
-          <small>Xin chào,</small>
-          <br>
-          <b>Nguyễn Văn Nghĩa</b>
+      {{#if layoutVM.isLogged}}
+      <div class="header-user dropdown">
+        <div data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="cursor: pointer">
+          <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+          <div class="user">
+            <small>Xin chào,</small>
+            <br>
+            <b>Nguyen Van Nghia</b>
+          </div>
         </div>
+        <ul class="dropdown-menu">
+          <li>
+            <a href="#">Cập nhật thông tin</a>
+          </li>
+          <li>
+            <a href="#">Đổi mật khẩu</a>
+          </li>
+          <li>
+            <a href="#">Xem đơn hàng</a>
+          </li>
+          <li role="separator" class="divider"></li>
+          <li>
+            <form action="/signout" method="POST">
+              <input type="submit" value="Đăng xuất">
+            </form>
+          </li>
+        </ul>
       </div>
+      {{else}}
+      <a href="/signin">
+        <div class="header-not-user">
+          <span>Đăng nhập
+            <span class="glyphicon glyphicon-log-in"></span>
+          </span>
+        </div>
+      </a>
+      {{/if}}
     </div>
+  </div>
   </div>
   {{!-- navigation --}}
   <div class="ban-top">
@@ -175,9 +214,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
       <div class="clearfix"></div>
     </div>
   </div>
-  {{!-- Template --}}
-  {{{body}}}
-  {{!-- Footer --}}
+  {{!-- Template --}} {{{body}}} {{!-- Footer --}}
   <div class="footer">
     <div class="coupons coupons-grids text-center">
       <div class="w3layouts_mail_grid">

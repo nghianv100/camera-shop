@@ -1,27 +1,34 @@
-// CƠ SỞ DỮ LIỆU DÙNG TIẾNG VIỆT:
-// sanpham: idsanpham, gia, loai, luotxem, luotban, mota, xuatxu, nhasanxuat, img, tensanpham, ngaytiepnhan
-// taikhoan: email, matkhau, hoten, sdt, admin
-
 // Khai báo các module cần sử dụng
 var createError = require('http-errors');
 var express = require('express');
 var path = require('path');
-var session = require('express-session');
-var bodyParser = require('body-parser');
 var logger = require('morgan');
-var handleLayout = require('./middlewares/handleLayout');
+var session = require('express-session');
+
+var database = require('./database/db');
+var handleLayout = require('./middlewares/handle-layout');
 
 // Khai báo các Controller
 var indexRouter = require('./routes/index'),
-    signinRouter = require('./routes/signin'),
-    signupRouter = require('./routes/signup'),
-    productRouter = require('./routes/product'),
-    searchRouter = require('./routes/search'),
-    contactRouter = require('./routes/contact'),
-    updateinfoRouter= require('./routes/updateinfo'),
-    dashboardRouter= require('./routes/dashboard');
+  signinRouter = require('./routes/signin'),
+  signupRouter = require('./routes/signup'),
+  signoutRouter = require('./routes/signout'),
+  productRouter = require('./routes/product'),
+  searchRouter = require('./routes/search'),
+  contactRouter = require('./routes/contact'),
+  updateinfoRouter = require('./routes/updateinfo'),
+  dashboardRouter = require('./routes/dashboard');
 
 var app = express();
+
+// Sessions manager
+app.use(session({
+  key: 'session_cookie_name',
+  secret: 'PTUDW2015',
+  store: database.sessions.getSessionStore(),
+  resave: false,
+  saveUninitialized: false
+}));
 
 // Cài đặt view engine
 app.set('views', path.join(__dirname, 'views'));
@@ -33,15 +40,6 @@ app.use(express.json());
 app.use(express.urlencoded({
   extended: false
 }));
-app.set('trust proxy', 1);
-app.use(session({
-  secret: 'PTUDW2015',
-  resave: false,
-  saveUninitialized: false,
-  cookie: {
-    secure: true
-  }
-}));
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(handleLayout);
 
@@ -52,6 +50,7 @@ app.get('/home', function (req, res) {
 })
 app.use('/signin', signinRouter);
 app.use('/signup', signupRouter);
+app.use('/signout', signoutRouter);
 app.use('/product', productRouter);
 app.use('/search', searchRouter);
 app.use('/contact', contactRouter);
