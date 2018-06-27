@@ -1,39 +1,33 @@
 <div class="single-product-detail">
     <div class="container">
+        {{#with product}}
         <div class="row">
             <div class="col-md-4 single-product-detail-inner-left">
-                <img src="/product/{{product.id}}/{{product.img}}" class="img-responsive">
+                <img src="/product/{{id}}/{{img}}" class="img-responsive">
             </div>
             <div class="col-md-8 single-product-detail-inner-right">
-                <h3 class="single-product-name">{{product.name}}</h3>
-                <h4 class="single-product-price">{{product.price_f}} VND</h4>
+                <h3 class="single-product-name">{{name}}</h3>
+                <h4 class="single-product-price">{{price_f}} VND</h4>
                 <p class="single-product-brand">Hãng sản xuất:
-                    <span>{{product.brand}}</span>
+                    <span>{{brand}}</span>
                 </p>
                 <p class="single-product-from">Xuất xứ:
-                    <span>{{product.nation_f}}</span>
+                    <span>{{nation_f}}</span>
                 </p>
                 <p class="single-product-type">Loại:
-                    <span>{{product.type_f}}</span>
+                    <span>{{type_f}}</span>
                 </p>
                 <p class="single-product-view">Lượt xem:
-                    <span>{{product.nviews}}</span>
+                    <span>{{nviews}}</span>
                 </p>
                 <p class="single-product-sold">Đã bán:
-                    <span>{{product.nsold}}</span>
+                    <span>{{nsold}}</span>
                 </p>
                 <div class="occasion-cart">
                     <div class="snipcart-details hvr-outline-out">
                         <form action="#" method="post">
                             <fieldset>
-                                <input type="hidden" name="cmd" value="_cart">
-                                <input type="hidden" name="add" value="1">
-                                <input type="hidden" name="business" value=" ">
-                                <input type="hidden" name="item_name" value="Cannon EOS 5D Mark III">
-                                <input type="hidden" name="amount" value="62,000,000,00">
-                                <input type="hidden" name="currency_code" value="VND">
-                                <input type="hidden" name="return" value=" ">
-                                <input type="hidden" name="cancel_return" value=" ">
+                                <input type="hidden" name="product" value="{{id}}">
                                 <input type="submit" name="submit" value="Thêm vào giỏ" class="button">
                             </fieldset>
                         </form>
@@ -51,154 +45,7 @@
                     <div class="resp-tabs-container">
                         <div class="tab1">
                             <div class="single_page_agile_its_w3ls">
-                                {{{product.detail}}} {{!--
-                                <h6>Bộ cảm biến 22.3 MP</h6>
-                                <p>
-                                    Độ phân giải cao 22.3 megapixel đem lại chất lượng hình ảnh đáng kính ngạc và chi tiết. Thừa hưởng từ công nghệ chế tạo cảm
-                                    biến CMOS của Canon, bao gồm một cấu trúc sắp xếp mạch cảm biến mới, tăng cường hiệu
-                                    năng của các vi thấu kính, giảm nhiễu trực tiếp trên cảm biến giúp cho hình ảnh mịn và
-                                    nét hơn cho dù chụp với tốc độ ISO cao hoặc phơi sáng lâu.
-                                </p>
-                                <h6>Hệ thống đo nét tiên tiến với 61 điểm</h6>
-                                <p>
-                                    Hệ thống đo nét tự động tiêu biểu trong thân máy EOS 5D Mark III là một bước đột phá mới. Với 61 điểm, trong đó có 41 điểm
-                                    đo nét hình chữ thập, thật là dễ dàng trong việc bắt nét và theo dõi chụp thể, dù đang
-                                    chuyển động với tốc độ cao. Hệ thống này hỗ trợ đo nét đa vùng giúp tăng cường khả năng
-                                    dõi theo chủ thể, bao gồm 5 điểm đo nét chữ thập kép ở trung tâm (f/2.8 đường chéo),
-                                    21 điểm lấy nét chữ thập ở trung tâm (f/5.6 ngang và dọc) và 20 điểm lấy nét biên chữ
-                                    thập (f/4 ngang) cùng với khả năng bắt nét siêu nhạy cho dù điều kiện sáng yếu (EV-2
-                                    cho điểm lấy nét ở giữa với ống kính có độ mở f/2.8). Công nghệ tiên tiến áp dụng trong
-                                    thân máy EOS 5D Mark III tăng cường độ chính xác cho cả những ống kính có độ mở f/4.0
-                                    và f/5.6.
-                                </p>
-                                <h6>ISO mở rộng tới 102400</h6>
-                                <p>
-                                    Với bất kì yêu cầu nào về việc phơi sáng, từ tình huống chụp thiếu sáng trong nhà đến chụp dư sáng ngoài trời, thân máy EOS
-                                    5D Mark III dễ dàng thay đổi thông số ISO (100-25600) và mở rộng tối đa L: ISO 50, H1:
-                                    51200 và H2: 102400 để phù hợp với các tình huống chụp đó.
-                                </p>
-                                <h6>Thông số</h6>
-                                <table>
-                                    <tbody>
-                                        <tr>
-                                            <td rel="bo_cam_bien_anh">Bộ cảm biến ảnh</td>
-                                            <td class="last">
-                                                Full Frame 35mm, độ phân giải cao 22.3 MP
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td rel="bo_xu_ly_anh">Bộ xử lý ảnh</td>
-                                            <td class="last">
-                                                DIGIC 5+
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td rel="toc_do_man_trap">Tốc độ màn trập</td>
-                                            <td class="last">
-                                                1/8000 giây tới 1/60 giây (Chế độ tự động chọn cảnh), X-sync ở tốc độ 1/200 giây. Với ống kính góc rộng, tốc độ chụp có thể
-                                                đạt 1/60 giây hoặc chậm hơn. 1/8000 giây to 30 giây, Bulb
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td rel="toc_do_chup">Tốc độ chụp</td>
-                                            <td class="last">
-                                                Chụp liên tục tốc độ cao tối đa xấp xỉ 6 hình/giây, Chụp liên tục tốc độ chậm tối đa xấp xỉ 3 hình/giây
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td rel="diem_lay_net">Điểm lấy nét</td>
-                                            <td class="last">
-                                                61 điểm (Tối đa 41 điểm lấy nét chữ thập). Lưu ý: Số lượng của điểm lấy nét thường và loại chữ thập phụ thuộc vào ống kính.
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td rel="screen_size">Kích thước màn hình</td>
-                                            <td class="last">
-                                                3.2 inch
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td rel="display_type">Loại / Công nghệ màn hình</td>
-                                            <td class="last">
-                                                LCD
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td rel="the_nho_tuong_thich">Thẻ nhớ tương thích</td>
-                                            <td class="last">
-                                                CF card (Loại I, UDMA loại 7), thẻ nhớ SD, SDHC, SDXC
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td rel="len">Ống kính</td>
-                                            <td class="last">
-                                                Ống kính Canon EF loại trừ ống kính EF-S. (Chiều dài tiêu cự ống kính hiệu quả giống như hiển thị trên ống kính)
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td rel="content_formats_supported">Hỗ trợ định dạng</td>
-                                            <td class="last">
-                                                AVI, RAW, H.264, MOV, MPEG-4
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td rel="sku">SKU</td>
-                                            <td class="last">
-                                                6007644329195
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td rel="brand">Thương hiệu</td>
-                                            <td class="last">
-                                                <a href="https://vi.wikipedia.org/wiki/Canon">Canon</a>
-
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td rel="item_model_number">Model</td>
-                                            <td class="last">
-                                                Canon 5D MARK III
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td rel="origin">Sản xuất tại</td>
-                                            <td class="last">
-                                                Nhật Bản
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td rel="product_weight">Trọng lượng</td>
-                                            <td class="last">
-                                                950
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td rel="dimensions">Kích thước</td>
-                                            <td class="last">
-                                                152.0 x 116.4 x 76.4mm
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td rel="color">Màu</td>
-                                            <td class="last">
-                                                Đen
-                                                <meta itemprop="color" content="">
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td rel="camera">Camera</td>
-                                            <td class="last">
-                                                22.3 MP
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td rel="included_accessories">Phụ kiện đi kèm</td>
-                                            <td class="last">
-                                                Thân máy, ống kính, Pin, Sạc, dây đeo, CD - ROM, Thẻ bảo hành, sách hướng dẫn
-                                            </td>
-                                        </tr>
-                                    </tbody>
-                                </table> --}}
+                                {{{product.detail}}}
                             </div>
                         </div>
                         <div class="tab2">
@@ -210,6 +57,7 @@
                 </div>
             </div>
         </div>
+        {{/with}}
         <div class="row">
             <div class="col-md-6 product-related related-type">
                 <h4 class="title">SP cùng loại</h4>
@@ -235,6 +83,11 @@
                 </a>
                 {{/each}}
             </div>
+            <button type="button" class="btn btn-default" id="testbtn">Test Button</button>
         </div>
     </div>
 </div>
+
+<script>
+
+</script>
