@@ -6425,12 +6425,12 @@ p.amount-product span {
     text-align: center;
 }
 
-.cart-cell .cart-cell-conf > input {
+.cart-cell .cart-cell-conf input {
     margin-top: 10px;
     width: 70%;
 }
 
-.cart-cell .cart-cell-conf > button {
+.cart-cell .cart-cell-conf button {
     margin-top: 20px;
     width: 70%;
     font-size: 1.4em;
