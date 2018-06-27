@@ -39,18 +39,10 @@
                                 <span class="nsold">{{luotban}}</span>
                             </div>
                             <div class="snipcart-details top_brand_home_details item_add single-item hvr-outline-out button2">
-                                <form action="#" method="post">
+                                <form class="product-cell-form">
                                     <fieldset>
-                                        <input type="hidden" name="cmd" value="_cart" />
-                                        <input type="hidden" name="add" value="1" />
-                                        <input type="hidden" name="business" value=" " />
-                                        <input type="hidden" name="item_name" value="Formal Blue Shirt" />
-                                        <input type="hidden" name="amount" value="30.99" />
-                                        <input type="hidden" name="discount_amount" value="1.00" />
-                                        <input type="hidden" name="currency_code" value="USD" />
-                                        <input type="hidden" name="return" value=" " />
-                                        <input type="hidden" name="cancel_return" value=" " />
-                                        <input type="submit" name="submit" value="Thêm vào giỏ" class="button" />
+                                        <input type="hidden" name="productId" value="{{idsanpham}}" />
+                                        <input type="submit" value="Thêm vào giỏ" class="button" />
                                     </fieldset>
                                 </form>
                             </div>
@@ -90,18 +82,10 @@
                                 <span class="nsold">{{luotban}}</span>
                             </div>
                             <div class="snipcart-details top_brand_home_details item_add single-item hvr-outline-out button2">
-                                <form action="#" method="post">
+                                <form class="product-cell-form">
                                     <fieldset>
-                                        <input type="hidden" name="cmd" value="_cart" />
-                                        <input type="hidden" name="add" value="1" />
-                                        <input type="hidden" name="business" value=" " />
-                                        <input type="hidden" name="item_name" value="Formal Blue Shirt" />
-                                        <input type="hidden" name="amount" value="30.99" />
-                                        <input type="hidden" name="discount_amount" value="1.00" />
-                                        <input type="hidden" name="currency_code" value="USD" />
-                                        <input type="hidden" name="return" value=" " />
-                                        <input type="hidden" name="cancel_return" value=" " />
-                                        <input type="submit" name="submit" value="Thêm vào giỏ" class="button" />
+                                        <input type="hidden" name="productId" value="{{idsanpham}}" />
+                                        <input type="submit" value="Thêm vào giỏ" class="button" />
                                     </fieldset>
                                 </form>
                             </div>
@@ -141,18 +125,10 @@
                                 <span class="nsold">{{luotban}}</span>
                             </div>
                             <div class="snipcart-details top_brand_home_details item_add single-item hvr-outline-out button2">
-                                <form action="#" method="post">
+                                <form class="product-cell-form">
                                     <fieldset>
-                                        <input type="hidden" name="cmd" value="_cart" />
-                                        <input type="hidden" name="add" value="1" />
-                                        <input type="hidden" name="business" value=" " />
-                                        <input type="hidden" name="item_name" value="Formal Blue Shirt" />
-                                        <input type="hidden" name="amount" value="30.99" />
-                                        <input type="hidden" name="discount_amount" value="1.00" />
-                                        <input type="hidden" name="currency_code" value="USD" />
-                                        <input type="hidden" name="return" value=" " />
-                                        <input type="hidden" name="cancel_return" value=" " />
-                                        <input type="submit" name="submit" value="Thêm vào giỏ" class="button" />
+                                        <input type="hidden" name="productId" value="{{idsanpham}}" />
+                                        <input type="submit" value="Thêm vào giỏ" class="button" />
                                     </fieldset>
                                 </form>
                             </div>
@@ -164,4 +140,36 @@
             </div>
         </div>
     </div>
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    <h4 class="modal-title" id="myModalLabel">Thông báo</h4>
+                </div>
+                <div class="modal-body">
+                    {{!-- Message Here --}}
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Đóng lại</button>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
+
+<script>
+    $('form.product-cell-form').submit(function (event) {
+        event.preventDefault();
+        var productId = $(this).find('input[name="productId"]').val();
+        $.post('/product/product-handle', {
+            id: productId,
+            quantity: 1
+        }, function (data, status) {
+            $('#myModal .modal-body').text(data);
+            $('#myModal').modal('show');
+        });
+    });
+</script>
