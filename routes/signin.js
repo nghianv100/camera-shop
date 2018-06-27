@@ -5,6 +5,9 @@ var accountDAO = require('../database/accountDAO');
 var router = express.Router();
 
 router.get('/', function (req, res, next) {
+    if (req.session.isLogged == true) {
+        res.redirect('/');
+    }
     res.render('login/signin', {
         title: 'Đăng nhập | CamShop',
         signin_fail: req.session.signin_fail,
@@ -37,10 +40,10 @@ router.post('/', function (req, res, next) {
                 req.session.cart = [];
 
                 var url = '/';
-                if(req.query.retUrl) {
+                if (req.query.retUrl) {
                     url = req.query.retUrl;
                 }
-                
+
                 res.redirect(url);
             }
         }

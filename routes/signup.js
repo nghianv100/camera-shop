@@ -5,6 +5,9 @@ var accountDAO = require('../database/accountDAO');
 var router = express.Router();
 
 router.get('/', function (req, res, next) {
+    if (req.session.isLogged == true) {
+        res.redirect('/');
+    }
     res.render('login/signup', {
         title: 'Đăng ký | CamShop',
         signup_fail: req.session.signup_fail,
@@ -25,12 +28,11 @@ router.post('/', function (req, res, next) {
     accountDAO.getUser(email).then(user => {
         if (user.length != 0) {
             req.session.signup_fail = true;
-            req.session.signup_succ = false;
             res.redirect('/signup');
         } else {
-            accountDAO.addUser(email, passwordmd5).then(result => {
+            var userName = email.slice(0, email.indexOf('@'));
+            accountDAO.addUser(email, passwordmd5, userName).then(result => {
                 req.session.signup_succ = true;
-                req.session.signup_fail = false;
                 res.redirect('/signup');
             });
         }
