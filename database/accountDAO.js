@@ -14,6 +14,7 @@ module.exports.getUser = function(email) {
 module.exports.changePassword = function(email, password) {
     var sql = ` UPDATE taikhoan SET matkhau = "${password}" where email = "${email}" `;
     return db.executeQuery(sql);
+}
 
 module.exports.updateUser = function(email, name, phoneNumber){
 	var sql = `UPDATE taikhoan SET hoten = "${name}", sdt="${phoneNumber}" WHERE email = "${email}"`;
