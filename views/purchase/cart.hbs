@@ -4,8 +4,7 @@
         <div class="col-md-9">
             {{#if empty}}
             <p style="text-align: center; font-style: italic">Giỏ hàng của bạn hiện tại đang trống trơn.</p>
-            {{else}} 
-            {{#each products}}
+            {{else}} {{#each products}}
             <div class="cart-cell">
                 <div class="row">
                     <div class="col-md-3 col-xs-3">
@@ -37,8 +36,7 @@
                     </div>
                 </div>
             </div>
-            {{/each}} 
-            {{/if}}
+            {{/each}} {{/if}}
         </div>
         <div class="col-md-3">
             <div class="cart-cal">
@@ -51,7 +49,9 @@
                 <h4 style="border-bottom: 1px solid black">Tổng số tiền</h4>
                 <p class="cart-cal-total">{{money_f}} VND</p>
                 <p class="cart-cal-vat">(Đã bao gồm VAT)</p>
-                <button type="button" class="btn btn-primary">Thanh toán</button>
+                <form action="/cart/purchase" method="get">
+                    <button type="submit" class="btn btn-primary">Thanh toán</button>
+                </form>
                 {{/if}}
             </div>
         </div>

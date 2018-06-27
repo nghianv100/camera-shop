@@ -166,3 +166,31 @@ module.exports.loadByCart = function (cart) {
     }
     return db.executeQuery(sql);
 }
+
+module.exports.updateAfterSold = function (cart) {
+    updateNSold(cart);
+    updateInventory(cart);
+}
+
+module.exports.loadBySubsOrder = function (sub) {
+    var sql = `SELECT * FROM sanpham WHERE idsanpham = "${sub[0].idsanpham}" `;
+    for (var i = 1; i < sub.length; i++) {
+        sql += ` OR idsanpham = "${sub[i].idsanpham}" `;
+    }
+    return db.executeQuery(sql);
+}
+
+async function updateNSold (cart) {
+    for(let i = 0; i < cart.length; i++) {
+        let sql = `UPDATE sanpham SET luotban = luotban + ${cart[i].quantity} WHERE idsanpham = "${cart[i].id}";`;
+        var temp = await db.executeQuery(sql);
+    }
+}
+
+async function updateInventory (cart) {
+    for(let i = 0; i < cart.length; i++) {
+        let sql = `UPDATE sanpham SET soluong = soluong - ${cart[i].quantity} WHERE idsanpham = "${cart[i].id}";`;
+        var temp = await db.executeQuery(sql);
+    }
+    var final = await db.executeQuery(`UPDATE sanpham SET soluong = 0 WHERE soluong < 0;`);
+}
