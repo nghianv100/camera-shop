@@ -1,3 +1,42 @@
 <div class="container">
     <h3 class="title">GIỎ HÀNG</h3>
+    <div class="row">
+        <div class="col-md-9">
+            {{#each products}}
+            <div class="cart-cell">
+                <div class="row">
+                    <div class="col-md-3 col-xs-3">
+                        <img class="img-thumb" src="/product/{{idsanpham}}/{{img}}">
+                    </div>
+                    <div class="col-md-6 col-xs-6">
+                        <a href="#" style="text-decoration: none">
+                            <p class="cart-cell-name">
+                                {{tensanpham}}
+                            </p>
+                            <p class="cart-cell-price">
+                                Đơn giá: {{gia_f}} VND
+                            </p>
+                        </a>
+                        <div class="cart-cell-info">
+                        </div>
+                    </div>
+                    <div class="col-md-3 col-xs-3">
+                        <div class="cart-cell-conf">
+                            <input type="number" min="1" value="{{quantity}}">
+                            <button type="button" class="btn btn-danger">X</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {{/each}}
+        </div>
+        <div class="col-md-3">
+            <div class="cart-cal">
+                <h4 style="border-bottom: 1px solid black">Tổng số tiền</h4>
+                <p class="cart-cal-total">{{money_f}} VND</p>
+                <p class="cart-cal-vat">(Đã bao gồm VAT)</p>
+                <button type="button" class="btn btn-primary">Thanh toán</button>
+            </div>
+        </div>
+    </div>
 </div>

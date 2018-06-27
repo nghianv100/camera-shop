@@ -6386,3 +6386,89 @@ p.amount-product span {
 .account-password form button {
     width: 120px;
 }
+
+/* Cart */
+
+.cart-cell {
+    background-color: rgba(225, 225, 225, 0.3);
+    padding: 0 10px;
+    margin: 10px 0;
+    border-radius: 12px;
+}
+
+.cart-cell .img-thumb {
+    width: 180px;
+    max-height: 140px;
+    padding: 10px;
+}
+
+.cart-cell .cart-cell-info {
+    padding: 10px 0;
+}
+
+.cart-cell .cart-cell-name {
+    margin-top: 20px;
+    font-size: 1.5em;
+    font-weight: bold;
+    color: darkslategray;
+}
+
+.cart-cell .cart-cell-price {
+    margin-top: 10px;
+    font-size: 1em;
+    font-weight: bold;
+    color: purple;
+}
+
+.cart-cell .cart-cell-conf {
+    padding: 10px;
+    text-align: center;
+}
+
+.cart-cell .cart-cell-conf > input {
+    margin-top: 10px;
+    width: 70%;
+}
+
+.cart-cell .cart-cell-conf > button {
+    margin-top: 20px;
+    width: 70%;
+    font-size: 1.4em;
+}
+
+.cart-cal {
+    background-color: rgba(153, 205, 50, 0.37);
+    padding: 0 10px;
+    margin: 10px 0;
+    border-radius: 12px;
+    border: 1px solid yellow;
+    text-align: center;
+}
+
+.cart-cal h4 {
+    padding-bottom: 5px;
+    margin: 10px auto;
+    text-align: center;
+    font-weight: bold;
+}
+
+.cart-cal p.cart-cal-total {
+    font-size: 1.5em;
+    color: darkred;
+    margin: 10px auto;
+    font-weight: bold;
+    text-align: center;
+}
+
+.cart-cal p.cart-cal-vat {
+    font-size: 0.9em;
+    margin: 10px auto;
+    text-align: center;
+}
+
+.cart-cal button {
+    width: 80%;
+    margin: 10px auto;
+    font-size: 1.2em;
+    font-weight: bold;
+}

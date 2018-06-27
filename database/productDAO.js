@@ -158,3 +158,11 @@ module.exports.increaseViews = function (id) {
     var sql = `UPDATE sanpham SET luotxem = luotxem + 1 WHERE idsanpham = "${id}";`
     return db.executeQuery(sql);
 }
+
+module.exports.loadByCart = function (cart) {
+    var sql = `SELECT * FROM sanpham WHERE idsanpham = "${cart[0].id}" `;
+    for(var i = 1; i < cart.length; i++) {
+        sql += ` OR idsanpham = "${cart[i].id}" `;
+    }
+    return db.executeQuery(sql);
+}
