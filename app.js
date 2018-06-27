@@ -18,7 +18,8 @@ var indexRouter = require('./routes/index'),
   searchRouter = require('./routes/search'),
   contactRouter = require('./routes/contact'),
   accountRouter = require('./routes/account'),
-  adminRouter = require('./routes/admin');
+  adminRouter = require('./routes/admin'),
+  cartRouter = require('./routes/cart');
 
 var app = express();
 
@@ -56,6 +57,7 @@ app.use('/product', productRouter);
 app.use('/search', searchRouter);
 app.use('/contact', contactRouter);
 app.use('/account', restrict, accountRouter);
+app.use('/cart', restrict, cartRouter);
 app.use('/admin', adminRouter);
 
 // Bắt lỗi
