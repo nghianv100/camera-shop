@@ -10,20 +10,16 @@ var database = require('./database/db');
 var handleLayout = require('./middlewares/handle-layout');
 
 // Khai báo các Controller
-var indexRouter = require('./routes/index'),
-  signinRouter = require('./routes/signin'),
-  signupRouter = require('./routes/signup'),
-  signoutRouter = require('./routes/signout'),
-  productRouter = require('./routes/product'),
-  searchRouter = require('./routes/search'),
-  contactRouter = require('./routes/contact'),
-  accountRouter = require('./routes/account'),
-  adminRouter = require('./routes/admin'),
-  cartRouter = require('./routes/cart'),
-  maproductsRouter = require('./routes/maproducts'),
-  maordersRouter = require('./routes/maorders'),
-  matypesRouter = require('./routes/matypes'),
-  mabrandsRouter = require('./routes/mabrands');
+var indexRouter = require('./routes/index');
+var signinRouter = require('./routes/signin');
+var signupRouter = require('./routes/signup');
+var signoutRouter = require('./routes/signout');
+var productRouter = require('./routes/product');
+var searchRouter = require('./routes/search');
+var contactRouter = require('./routes/contact');
+var accountRouter = require('./routes/account');
+var cartRouter = require('./routes/cart');
+var adminRouter = require('./routes/admin/admin');
 
 var app = express();
 
@@ -63,10 +59,6 @@ app.use('/contact', contactRouter);
 app.use('/account', restrict, accountRouter);
 app.use('/cart', restrict, cartRouter);
 app.use('/admin', adminRouter);
-app.use('/admin/quanlysanpham', maproductsRouter);
-app.use('/admin/quanlyloai',matypesRouter );
-app.use('/admin/quanlynhasx', mabrandsRouter );
-app.use('/admin/quanlydonhang',maordersRouter );
 
 // Bắt lỗi
 app.use(function (req, res, next) {
