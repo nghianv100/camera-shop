@@ -8,7 +8,7 @@ module.exports.executeQuery = function (query) {
             host: 'localhost',
             port: 3306,
             user: 'root',
-            password: '+nguyentanphat13495+',
+            password: 'thienthanma',
             database: 'camera_shop'
         });
 
@@ -33,7 +33,7 @@ module.exports.sessions = {
             host: 'localhost',
             port: 3306,
             user: 'root',
-            password: 'laluto123',
+            password: 'thienthanma',
             database: 'camera_shop',
             createDatabaseTable: true,
             schema: {
