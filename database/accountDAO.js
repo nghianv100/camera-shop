@@ -9,3 +9,8 @@ module.exports.getUser = function(email) {
     var sql = `SELECT * FROM taikhoan where email = "${email}";`;
     return db.executeQuery(sql);
 }
+
+module.exports.changePassword = function(email, password) {
+    var sql = ` UPDATE taikhoan SET matkhau = "${password}" where email = "${email}" `;
+    return db.executeQuery(sql);
+}
