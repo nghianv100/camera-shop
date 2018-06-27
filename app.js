@@ -18,7 +18,11 @@ var indexRouter = require('./routes/index'),
   searchRouter = require('./routes/search'),
   contactRouter = require('./routes/contact'),
   accountRouter = require('./routes/account'),
-  adminRouter = require('./routes/admin');
+  adminRouter = require('./routes/admin'),
+  maproductsRouter = require('./routes/maproducts'),
+  maordersRouter = require('./routes/maorders'),
+  matypesRouter = require('./routes/matypes'),
+  mabrandsRouter = require('./routes/mabrands');
 
 var app = express();
 
@@ -57,6 +61,10 @@ app.use('/search', searchRouter);
 app.use('/contact', contactRouter);
 app.use('/account', restrict, accountRouter);
 app.use('/admin', adminRouter);
+app.use('/admin/quanlysanpham', maproductsRouter);
+app.use('/admin/quanlyloai',matypesRouter );
+app.use('/admin/quanlynhasx', mabrandsRouter );
+app.use('/admin/quanlydonhang',maordersRouter );
 
 // Bắt lỗi
 app.use(function (req, res, next) {
