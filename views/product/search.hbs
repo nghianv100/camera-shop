@@ -18,7 +18,7 @@
             <select class="form-control" id="brand" name="brand">
                 <option value="all">Tất cả</option>
                 {{#each brands}}
-                <option>{{this.nhasanxuat}}</option>
+                <option>{{nhasanxuat}}</option>
                 {{/each}}
             </select>
         </div>
@@ -28,7 +28,7 @@
                 <select class="form-control" id="type" name="type">
                     <option value="all">Tất cả</option>
                     {{#each types}}
-                    <option>{{this.loai}}</option>
+                    <option value="{{loai}}">{{tenloai}}</option>
                     {{/each}}
                 </select>
             </div>
