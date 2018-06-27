@@ -19,6 +19,7 @@ var indexRouter = require('./routes/index'),
   contactRouter = require('./routes/contact'),
   accountRouter = require('./routes/account'),
   adminRouter = require('./routes/admin'),
+  cartRouter = require('./routes/cart'),
   maproductsRouter = require('./routes/maproducts'),
   maordersRouter = require('./routes/maorders'),
   matypesRouter = require('./routes/matypes'),
@@ -60,6 +61,7 @@ app.use('/product', productRouter);
 app.use('/search', searchRouter);
 app.use('/contact', contactRouter);
 app.use('/account', restrict, accountRouter);
+app.use('/cart', restrict, cartRouter);
 app.use('/admin', adminRouter);
 app.use('/admin/quanlysanpham', maproductsRouter);
 app.use('/admin/quanlyloai',matypesRouter );
