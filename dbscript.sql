@@ -18,6 +18,86 @@ USE `camera_shop`;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
+-- Table structure for table `donhang`
+--
+
+DROP TABLE IF EXISTS `donhang`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `donhang` (
+  `madonhang` varchar(10) NOT NULL,
+  `email` varchar(50) DEFAULT NULL,
+  `ngay` datetime DEFAULT NULL,
+  `thanhtien` int(11) DEFAULT NULL,
+  `trangthai` tinyint(4) DEFAULT NULL,
+  `diachi` varchar(200) DEFAULT NULL,
+  PRIMARY KEY (`madonhang`),
+  KEY `FK_donhang_taikhoan_idx` (`email`),
+  CONSTRAINT `FK_donhang_taikhoan` FOREIGN KEY (`email`) REFERENCES `taikhoan` (`email`) ON DELETE SET NULL ON UPDATE NO ACTION
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `donhang`
+--
+
+LOCK TABLES `donhang` WRITE;
+/*!40000 ALTER TABLE `donhang` DISABLE KEYS */;
+/*!40000 ALTER TABLE `donhang` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `donhang_sub`
+--
+
+DROP TABLE IF EXISTS `donhang_sub`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `donhang_sub` (
+  `madonhang` varchar(10) NOT NULL,
+  `idsanpham` char(5) NOT NULL,
+  `soluong` int(11) DEFAULT NULL,
+  PRIMARY KEY (`madonhang`,`idsanpham`),
+  KEY `FK_sub_sanpham_idx` (`idsanpham`),
+  CONSTRAINT `FK_sub_donhang` FOREIGN KEY (`madonhang`) REFERENCES `donhang` (`madonhang`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `FK_sub_sanpham` FOREIGN KEY (`idsanpham`) REFERENCES `sanpham` (`idsanpham`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `donhang_sub`
+--
+
+LOCK TABLES `donhang_sub` WRITE;
+/*!40000 ALTER TABLE `donhang_sub` DISABLE KEYS */;
+/*!40000 ALTER TABLE `donhang_sub` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `loaisanpham`
+--
+
+DROP TABLE IF EXISTS `loaisanpham`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `loaisanpham` (
+  `loai` varchar(20) NOT NULL,
+  `tenloai` varchar(20) DEFAULT NULL,
+  PRIMARY KEY (`loai`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `loaisanpham`
+--
+
+LOCK TABLES `loaisanpham` WRITE;
+/*!40000 ALTER TABLE `loaisanpham` DISABLE KEYS */;
+INSERT INTO `loaisanpham` VALUES ('360degree','360 độ'),('compact','Compact'),('dslr','DSLR'),('mirrorless','Không gương lật');
+/*!40000 ALTER TABLE `loaisanpham` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `sanpham`
 --
 
@@ -36,7 +116,12 @@ CREATE TABLE `sanpham` (
   `img` varchar(200) DEFAULT NULL,
   `tensanpham` varchar(100) DEFAULT NULL,
   `ngaytiepnhan` datetime DEFAULT NULL,
-  PRIMARY KEY (`idsanpham`)
+  `soluong` int(11) DEFAULT '30',
+  PRIMARY KEY (`idsanpham`),
+  KEY `FK_sanpham_loaisanpham_idx` (`loai`),
+  KEY `FK_sanpham_thuonghieu_idx` (`nhasanxuat`),
+  CONSTRAINT `FK_sanpham_loaisanpham` FOREIGN KEY (`loai`) REFERENCES `loaisanpham` (`loai`) ON DELETE SET NULL ON UPDATE NO ACTION,
+  CONSTRAINT `FK_sanpham_thuonghieu` FOREIGN KEY (`nhasanxuat`) REFERENCES `thuonghieu` (`nhasanxuat`) ON DELETE SET NULL ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -46,8 +131,33 @@ CREATE TABLE `sanpham` (
 
 LOCK TABLES `sanpham` WRITE;
 /*!40000 ALTER TABLE `sanpham` DISABLE KEYS */;
-INSERT INTO `sanpham` VALUES ('c0001',13625000,0,0,'<p>Không có mô tả<p>','china','360degree','GoPro','360-GOPRO-gopro fusion.jpg','GoPro Fusion','2018-06-22 00:00:00'),('c0002',8620000,0,0,'<p>Không có mô tả<p>','america','360degree','Kodak','360-KODAK-kodak pixpro orbit360 4k.jpg','Kodak Pixpro Orbit 360 4K','2018-06-18 00:00:00'),('c0003',7620000,0,0,'<p>Không có mô tả<p>','america','360degree','Kodak','360-KODAK-kodak pixpro sp360 4k.jpg','Kodak Pixpro SP360 4K','2018-06-18 00:00:00'),('c0004',2025000,0,1,'<p>Không có mô tả<p>','south-korea','360degree','LG','360-LG-lg 360 cam.jpg','LG G5 Friend 360','2018-06-12 00:00:00'),('c0005',11280000,1,0,'<p>Không có mô tả<p>','japan','360degree','Nikon','360-NIKON-nikon keymission 360 4k.jpg','Nikon KeyMission 360','2018-06-13 00:00:00'),('c0006',7710000,0,0,'<p>Không có mô tả<p>','japan','360degree','Ricoh','360-RICOH-ricoh theta v.jpg','Ricoh Theta V 4K','2018-06-17 00:00:00'),('c0007',1135000,0,0,'<p>Không có mô tả<p>','south-korea','360degree','Samsung','360-SAMSUNG-samsung gear 360.jpg','Samsung Gear 360','2018-06-15 00:00:00'),('c0008',11350000,10,0,'<p>Không có mô tả<p>','china','compact','Canon','compact-CANON-canon powershot d30.jpg','Canon PowerShot D30','2018-06-11 00:00:00'),('c0009',7230000,0,0,'<p>Không có mô tả<p>','japan','compact','Canon','compact-CANON-canon powershot n2.jpg','Canon PowerShot N2','2018-06-11 00:00:00'),('c0010',5890000,0,2,'<p>Không có mô tả<p>','japan','compact','Canon','compact-CANON-canon powershot sx420.jpg','Canon PowerShot SX420','2018-06-06 00:00:00'),('c0011',6800000,0,0,'<p>Không có mô tả<p>','china','compact','Canon','compact-CANON-canon powershot sx530.jpg','Canon PowerShot SX530','2018-06-08 00:00:00'),('c0012',5890000,9,0,'<p>Không có mô tả<p>','japan','compact','Canon','compact-CANON-canon powershot sx620.jpg','Canon PowerShot SX620','2018-06-02 00:00:00'),('c0013',28180000,0,5,'<p>Không có mô tả<p>','america','compact','Fujifilm','compact-FUJIFILM-fujifilm x100f.jpg','Fujifilm X100F','2018-05-30 00:00:00'),('c0014',20490000,0,0,'<p>Không có mô tả<p>','japan','compact','Fujifilm','compact-FUJIFILM-fujifilm x70.jpg','Fujifilm X70','2018-05-29 00:00:00'),('c0015',2250000,0,0,'<p>Không có mô tả<p>','america','compact','Kodak','compact-KODAK-kodak pixpro fz151.jpg','Kodak Pixpro FZ151','2018-05-24 00:00:00'),('c0016',2050000,0,0,'<p>Không có mô tả<p>','america','compact','Kodak','compact-KODAK-kodak pixpro fz51.jpg','Kodak Pixpro FZ51','2018-05-27 00:00:00'),('c0017',2150000,0,0,'<p>Không có mô tả<p>','america','compact','Kodak','compact-KODAK-kodak pixpro wp1 sport.jpg','Kodak pixpro WP1 Sport','2018-05-27 00:00:00'),('c0018',4030000,0,10,'<p>Không có mô tả<p>','south-korea','compact','Nikon','compact-NIKON-nikon coolpix a300.jpg','Nikon Coolpix A300','2018-05-22 00:00:00'),('c0019',1910000,8,0,'<p>Không có mô tả<p>','japan','compact','Nikon','compact-NIKON-nikon coolpix l32.jpg','Nikon Coolpix L32','2018-05-23 00:00:00'),('c0020',4420000,0,0,'<p>Không có mô tả<p>','japan','compact','Nikon','compact-NIKON-nikon coolpix w100.jpg','Nikon Coolpix W100','2018-05-18 00:00:00'),('c0021',31790000,0,5,'<p>Không có mô tả<p>','japan','compact','Sony','compact-SONY-sony cybershot rx10 iii.jpg','Sony Cybershot RX10 III','2018-05-19 00:00:00'),('c0022',38620000,0,0,'<p>Không có mô tả<p>','japan','compact','Sony','compact-SONY-sony cybershot rx10 iv.jpg','Sony Cybershot RX10 IV','2018-05-20 00:00:00'),('c0023',2290000,0,0,'<p>Không có mô tả<p>','japan','compact','Sony','compact-SONY-sony cybershot wx220.jpg','Sony Cubershot WX220','2018-05-20 00:00:00'),('c0024',8390000,0,0,'<p>Không có mô tả<p>','japan','dslr','Canon','dslr-CANON-canon eos 1300d Kit.jpg','Canon EOS 1300D','2018-06-21 00:00:00'),('c0025',13190000,0,0,'<p>Không có mô tả<p>','china','dslr','Canon','dslr-CANON-canon eos 1500d.jpg','Canon EOS 1500D','2018-05-13 00:00:00'),('c0026',36190000,0,0,'<p>Không có mô tả<p>','japan','dslr','Canon','dslr-CANON-canon eos 3000d.jpg','Canon EOS 3000D','2018-05-15 00:00:00'),('c0027',65990000,0,0,'<p>Không có mô tả<p>','america','dslr','Canon','dslr-CANON-canon eos 5d mark iii.jpg','Canon EOS 5D Mark III','2018-05-16 00:00:00'),('c0028',67990000,0,0,'<p>Không có mô tả<p>','america','dslr','Canon','dslr-CANON-canon eos 5d mark-iii-1.jpg','Canon EOS 5D Mark III-1','2018-05-24 00:00:00'),('c0029',64990000,7,0,'<p>Không có mô tả<p>','china','dslr','Canon','dslr-CANON-canon eos 5d mark-iii-2.jpg','Canon EOS 5D Mark III-2','2018-06-03 00:00:00'),('c0030',62990000,0,0,'<p>Không có mô tả<p>','china','dslr','Canon','dslr-CANON-canon eos 5d mark-iii-3.jpg','Canon EOS 5D Mark III-3','2018-06-02 00:00:00'),('c0031',49950000,5,0,'<p>Không có mô tả<p>','japan','dslr','Canon','dslr-CANON-canon eos 6d.jpg','Canon EOS 6D','2018-05-03 00:00:00'),('c0032',25750000,0,0,'<p>Không có mô tả<p>','japan','dslr','Canon','dslr-CANON-canon eos 70d.jpg','Canon EOS 70D','2018-05-02 00:00:00'),('c0033',18500000,0,0,'<p>Không có mô tả<p>','america','dslr','Kodak','dslr-KODAK-kodak pixpro az365.jpg','Kodak Pixpro AZ365','2018-05-01 00:00:00'),('c0034',16450000,0,0,'<p>Không có mô tả<p>','america','dslr','Kodak','dslr-KODAK-kodak pixpro az421.jpg','Kodak Pixpro AZ421','2018-05-08 00:00:00'),('c0035',19500000,0,0,'<p>Không có mô tả<p>','america','dslr','Kodak','dslr-KODAK-kodak pixpro az525.jpg','Kodak Pixpro AZ525','2018-05-08 00:00:00'),('c0036',23500000,0,0,'<p>Không có mô tả<p>','america','dslr','Kodak','dslr-KODAK-kodak pixpro az651.jpg','Kodak Pixpro AZ651','2018-06-13 00:00:00'),('c0037',14490000,0,0,'<p>Không có mô tả<p>','south-korea','dslr','Nikon','dslr-NIKON-nikon d3400.jpg','Nikon D3400','2018-06-07 00:00:00'),('c0038',17490000,0,0,'<p>Không có mô tả<p>','america','dslr','Nikon','dslr-NIKON-nikon d5500.jpg','Nikon D5500','2018-05-14 00:00:00'),('c0039',19490000,0,0,'<p>Không có mô tả<p>','japan','dslr','Nikon','dslr-NIKON-nikon d7100.jpg','Nikon D7100','2018-05-27 00:00:00'),('c0040',20490000,0,0,'<p>Không có mô tả<p>','japan','dslr','Nikon','dslr-NIKON-nikon d7500.jpg','Nikon D7500','2018-05-29 00:00:00'),('c0041',24490000,0,0,'<p>Không có mô tả<p>','japan','dslr','Nikon','dslr-NIKON-nikon d850.jpg','Nikon D850','2018-05-25 00:00:00'),('c0042',14390000,0,0,'<p>Không có mô tả<p>','japan','dslr','Sony','dslr-SONY-sony a58.jpg','Sony A58','2018-05-24 00:00:00'),('c0043',16390000,0,0,'<p>Không có mô tả<p>','china','dslr','Sony','dslr-SONY-sony a68.jpg','Sony A68','2018-05-19 00:00:00'),('c0044',16990000,0,0,'<p>Không có mô tả<p>','japan','dslr','Sony','dslr-SONY-sony a7s.JPG','Sony A7S','2018-05-22 00:00:00'),('c0045',11990000,0,0,'<p>Không có mô tả<p>','japan','mirrorless','Canon','mirrorless-CANON-canon eos m100.jpg','Canon EOS M100','2018-05-28 00:00:00'),('c0046',14990000,0,0,'<p>Không có mô tả<p>','japan','mirrorless','Canon','mirrorless-CANON-canon eos m6.jpg','Canon EOS M6','2018-06-17 00:00:00'),('c0047',24990000,0,0,'<p>Không có mô tả<p>','japan','mirrorless','Fujifilm','mirrorless-FUJIFILM-fujifilm x-e3.jpg','Fujifilm X-E3','2018-06-08 00:00:00'),('c0048',27990000,0,0,'<p>Không có mô tả<p>','japan','mirrorless','Fujifilm','mirrorless-FUJIFILM-fujifilm x-h1.jpg','Fujifilm X-H1','2018-06-14 00:00:00'),('c0049',42990000,0,0,'<p>Không có mô tả<p>','japan','mirrorless','Fujifilm','mirrorless-FUJIFILM-fujifilm x-t2.jpg','Fujifilm X-T2','2018-06-20 00:00:00'),('c0050',12490000,0,0,'<p>Không có mô tả<p>','japan','mirrorless','Panasonic','mirrorless-PANASONIC-panasonic g80.jpg','Panasonic G80','2018-06-08 00:00:00'),('c0051',12290000,0,0,'<p>Không có mô tả<p>','japan','mirrorless','Panasonic','mirrorless-PANASONIC-panasonic lumix g7.jpg','Panasonic G7','2018-06-16 00:00:00'),('c0052',43490000,0,0,'<p>Không có mô tả<p>','japan','mirrorless','Panasonic','mirrorless-PANASONIC-panasonic lumix gh5.jpg','Panasonic Lumix GH5','2018-05-03 00:00:00'),('c0053',36490000,0,0,'<p>Không có mô tả<p>','china','mirrorless','Sony','mirrorless-SONY-sony a6500.jpg','Sony A6500','2018-05-11 00:00:00'),('c0054',72490000,0,0,'<p>Không có mô tả<p>','america','mirrorless','Sony','mirrorless-SONY-sony a7r iii.jpg','Sony A7R III','2018-05-12 00:00:00'),('c0055',89490000,0,0,'<p>Không có mô tả<p>','america','mirrorless','Sony','mirrorless-SONY-sony a9.jpeg','Sony A9','2018-06-17 00:00:00');
+INSERT INTO `sanpham` VALUES ('c0001',13625000,29,0,'<p>Không có mô tả<p>','china','360degree','GoPro','360-GOPRO-gopro fusion.jpg','GoPro Fusion','2018-06-22 00:00:00',30),('c0002',8620000,30,0,'<p>Không có mô tả<p>','america','360degree','Kodak','360-KODAK-kodak pixpro orbit360 4k.jpg','Kodak Pixpro Orbit 360 4K','2018-06-18 00:00:00',30),('c0003',7620000,2,0,'<p>Không có mô tả<p>','america','360degree','Kodak','360-KODAK-kodak pixpro sp360 4k.jpg','Kodak Pixpro SP360 4K','2018-06-18 00:00:00',30),('c0004',2025000,1,1,'<p>Không có mô tả<p>','south-korea','360degree','LG','360-LG-lg 360 cam.jpg','LG G5 Friend 360','2018-06-12 00:00:00',30),('c0005',11280000,1,0,'<p>Không có mô tả<p>','japan','360degree','Nikon','360-NIKON-nikon keymission 360 4k.jpg','Nikon KeyMission 360','2018-06-13 00:00:00',30),('c0006',7710000,0,0,'<p>Không có mô tả<p>','japan','360degree','Ricoh','360-RICOH-ricoh theta v.jpg','Ricoh Theta V 4K','2018-06-17 00:00:00',30),('c0007',1135000,1,0,'<p>Không có mô tả<p>','south-korea','360degree','Samsung','360-SAMSUNG-samsung gear 360.jpg','Samsung Gear 360','2018-06-15 00:00:00',30),('c0008',11350000,16,0,'<p>Không có mô tả<p>','china','compact','Canon','compact-CANON-canon powershot d30.jpg','Canon PowerShot D30','2018-06-11 00:00:00',30),('c0009',7230000,1,0,'<p>Không có mô tả<p>','japan','compact','Canon','compact-CANON-canon powershot n2.jpg','Canon PowerShot N2','2018-06-11 00:00:00',30),('c0010',5890000,0,2,'<p>Không có mô tả<p>','japan','compact','Canon','compact-CANON-canon powershot sx420.jpg','Canon PowerShot SX420','2018-06-06 00:00:00',30),('c0011',6800000,0,0,'<p>Không có mô tả<p>','china','compact','Canon','compact-CANON-canon powershot sx530.jpg','Canon PowerShot SX530','2018-06-08 00:00:00',30),('c0012',5890000,16,0,'<p>Không có mô tả<p>','japan','compact','Canon','compact-CANON-canon powershot sx620.jpg','Canon PowerShot SX620','2018-06-02 00:00:00',30),('c0013',28180000,0,5,'<p>Không có mô tả<p>','america','compact','Fujifilm','compact-FUJIFILM-fujifilm x100f.jpg','Fujifilm X100F','2018-05-30 00:00:00',30),('c0014',20490000,0,0,'<p>Không có mô tả<p>','japan','compact','Fujifilm','compact-FUJIFILM-fujifilm x70.jpg','Fujifilm X70','2018-05-29 00:00:00',30),('c0015',2250000,0,0,'<p>Không có mô tả<p>','america','compact','Kodak','compact-KODAK-kodak pixpro fz151.jpg','Kodak Pixpro FZ151','2018-05-24 00:00:00',30),('c0016',2050000,0,0,'<p>Không có mô tả<p>','america','compact','Kodak','compact-KODAK-kodak pixpro fz51.jpg','Kodak Pixpro FZ51','2018-05-27 00:00:00',30),('c0017',2150000,0,0,'<p>Không có mô tả<p>','america','compact','Kodak','compact-KODAK-kodak pixpro wp1 sport.jpg','Kodak pixpro WP1 Sport','2018-05-27 00:00:00',30),('c0018',4030000,0,10,'<p>Không có mô tả<p>','south-korea','compact','Nikon','compact-NIKON-nikon coolpix a300.jpg','Nikon Coolpix A300','2018-05-22 00:00:00',30),('c0019',1910000,9,0,'<p>Không có mô tả<p>','japan','compact','Nikon','compact-NIKON-nikon coolpix l32.jpg','Nikon Coolpix L32','2018-05-23 00:00:00',30),('c0020',4420000,0,0,'<p>Không có mô tả<p>','japan','compact','Nikon','compact-NIKON-nikon coolpix w100.jpg','Nikon Coolpix W100','2018-05-18 00:00:00',30),('c0021',31790000,2,5,'<p>Không có mô tả<p>','japan','compact','Sony','compact-SONY-sony cybershot rx10 iii.jpg','Sony Cybershot RX10 III','2018-05-19 00:00:00',30),('c0022',38620000,0,0,'<p>Không có mô tả<p>','japan','compact','Sony','compact-SONY-sony cybershot rx10 iv.jpg','Sony Cybershot RX10 IV','2018-05-20 00:00:00',30),('c0023',2290000,0,0,'<p>Không có mô tả<p>','japan','compact','Sony','compact-SONY-sony cybershot wx220.jpg','Sony Cubershot WX220','2018-05-20 00:00:00',30),('c0024',8390000,51,0,'<p>Không có mô tả<p>','japan','dslr','Canon','dslr-CANON-canon eos 1300d Kit.jpg','Canon EOS 1300D','2018-06-21 00:00:00',30),('c0025',13190000,0,0,'<p>Không có mô tả<p>','china','dslr','Canon','dslr-CANON-canon eos 1500d.jpg','Canon EOS 1500D','2018-05-13 00:00:00',30),('c0026',36190000,0,0,'<p>Không có mô tả<p>','japan','dslr','Canon','dslr-CANON-canon eos 3000d.jpg','Canon EOS 3000D','2018-05-15 00:00:00',30),('c0027',65990000,0,0,'<p>Không có mô tả<p>','america','dslr','Canon','dslr-CANON-canon eos 5d mark iii.jpg','Canon EOS 5D Mark III','2018-05-16 00:00:00',30),('c0028',67990000,1,0,'<p>Không có mô tả<p>','america','dslr','Canon','dslr-CANON-canon eos 5d mark-iii-1.jpg','Canon EOS 5D Mark III-1','2018-05-24 00:00:00',30),('c0029',64990000,15,0,'<p>Không có mô tả<p>','china','dslr','Canon','dslr-CANON-canon eos 5d mark-iii-2.jpg','Canon EOS 5D Mark III-2','2018-06-03 00:00:00',30),('c0030',62990000,0,0,'<p>Không có mô tả<p>','china','dslr','Canon','dslr-CANON-canon eos 5d mark-iii-3.jpg','Canon EOS 5D Mark III-3','2018-06-02 00:00:00',30),('c0031',49950000,5,0,'<p>Không có mô tả<p>','japan','dslr','Canon','dslr-CANON-canon eos 6d.jpg','Canon EOS 6D','2018-05-03 00:00:00',30),('c0032',25750000,0,0,'<p>Không có mô tả<p>','japan','dslr','Canon','dslr-CANON-canon eos 70d.jpg','Canon EOS 70D','2018-05-02 00:00:00',30),('c0033',18500000,0,0,'<p>Không có mô tả<p>','america','dslr','Kodak','dslr-KODAK-kodak pixpro az365.jpg','Kodak Pixpro AZ365','2018-05-01 00:00:00',30),('c0034',16450000,0,0,'<p>Không có mô tả<p>','america','dslr','Kodak','dslr-KODAK-kodak pixpro az421.jpg','Kodak Pixpro AZ421','2018-05-08 00:00:00',30),('c0035',19500000,0,0,'<p>Không có mô tả<p>','america','dslr','Kodak','dslr-KODAK-kodak pixpro az525.jpg','Kodak Pixpro AZ525','2018-05-08 00:00:00',30),('c0036',23500000,0,0,'<p>Không có mô tả<p>','america','dslr','Kodak','dslr-KODAK-kodak pixpro az651.jpg','Kodak Pixpro AZ651','2018-06-13 00:00:00',30),('c0037',14490000,1,0,'<p>Không có mô tả<p>','south-korea','dslr','Nikon','dslr-NIKON-nikon d3400.jpg','Nikon D3400','2018-06-07 00:00:00',30),('c0038',17490000,0,0,'<p>Không có mô tả<p>','america','dslr','Nikon','dslr-NIKON-nikon d5500.jpg','Nikon D5500','2018-05-14 00:00:00',30),('c0039',19490000,0,0,'<p>Không có mô tả<p>','japan','dslr','Nikon','dslr-NIKON-nikon d7100.jpg','Nikon D7100','2018-05-27 00:00:00',30),('c0040',20490000,0,0,'<p>Không có mô tả<p>','japan','dslr','Nikon','dslr-NIKON-nikon d7500.jpg','Nikon D7500','2018-05-29 00:00:00',30),('c0041',24490000,0,0,'<p>Không có mô tả<p>','japan','dslr','Nikon','dslr-NIKON-nikon d850.jpg','Nikon D850','2018-05-25 00:00:00',30),('c0042',14390000,0,0,'<p>Không có mô tả<p>','japan','dslr','Sony','dslr-SONY-sony a58.jpg','Sony A58','2018-05-24 00:00:00',30),('c0043',16390000,0,0,'<p>Không có mô tả<p>','china','dslr','Sony','dslr-SONY-sony a68.jpg','Sony A68','2018-05-19 00:00:00',30),('c0044',16990000,1,0,'<p>Không có mô tả<p>','japan','dslr','Sony','dslr-SONY-sony a7s.JPG','Sony A7S','2018-05-22 00:00:00',30),('c0045',11990000,1,0,'<p>Không có mô tả<p>','japan','mirrorless','Canon','mirrorless-CANON-canon eos m100.jpg','Canon EOS M100','2018-05-28 00:00:00',30),('c0046',14990000,2,0,'<p>Không có mô tả<p>','japan','mirrorless','Canon','mirrorless-CANON-canon eos m6.jpg','Canon EOS M6','2018-06-17 00:00:00',30),('c0047',24990000,0,0,'<p>Không có mô tả<p>','japan','mirrorless','Fujifilm','mirrorless-FUJIFILM-fujifilm x-e3.jpg','Fujifilm X-E3','2018-06-08 00:00:00',30),('c0048',27990000,0,0,'<p>Không có mô tả<p>','japan','mirrorless','Fujifilm','mirrorless-FUJIFILM-fujifilm x-h1.jpg','Fujifilm X-H1','2018-06-14 00:00:00',30),('c0049',42990000,6,0,'<p>Không có mô tả<p>','japan','mirrorless','Fujifilm','mirrorless-FUJIFILM-fujifilm x-t2.jpg','Fujifilm X-T2','2018-06-20 00:00:00',30),('c0050',12490000,1,0,'<p>Không có mô tả<p>','japan','mirrorless','Panasonic','mirrorless-PANASONIC-panasonic g80.jpg','Panasonic G80','2018-06-08 00:00:00',30),('c0051',12290000,0,0,'<p>Không có mô tả<p>','japan','mirrorless','Panasonic','mirrorless-PANASONIC-panasonic lumix g7.jpg','Panasonic G7','2018-06-16 00:00:00',30),('c0052',43490000,0,0,'<p>Không có mô tả<p>','japan','mirrorless','Panasonic','mirrorless-PANASONIC-panasonic lumix gh5.jpg','Panasonic Lumix GH5','2018-05-03 00:00:00',30),('c0053',36490000,0,0,'<p>Không có mô tả<p>','china','mirrorless','Sony','mirrorless-SONY-sony a6500.jpg','Sony A6500','2018-05-11 00:00:00',30),('c0054',72490000,0,0,'<p>Không có mô tả<p>','america','mirrorless','Sony','mirrorless-SONY-sony a7r iii.jpg','Sony A7R III','2018-05-12 00:00:00',30),('c0055',89490000,2,0,'<p>Không có mô tả<p>','america','mirrorless','Sony','mirrorless-SONY-sony a9.jpeg','Sony A9','2018-06-17 00:00:00',30);
 /*!40000 ALTER TABLE `sanpham` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `sessions`
+--
+
+DROP TABLE IF EXISTS `sessions`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `sessions` (
+  `session_id` varchar(128) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL,
+  `expires` int(11) unsigned NOT NULL,
+  `data` text CHARACTER SET utf8mb4 COLLATE utf8mb4_bin,
+  PRIMARY KEY (`session_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `sessions`
+--
+
+LOCK TABLES `sessions` WRITE;
+/*!40000 ALTER TABLE `sessions` DISABLE KEYS */;
+INSERT INTO `sessions` VALUES ('7C-u3Jdy_aF7n3zNT2DOTzv8fPo1oLGP',1530118731,'{\"cookie\":{\"originalMaxAge\":null,\"expires\":null,\"httpOnly\":true,\"path\":\"/\"},\"isLogged\":true,\"user\":{\"email\":\"vannghia@gmail.com\",\"matkhau\":\"f5bb0c8de146c67b44babbf4e6584cc0\",\"hoten\":\"Nghia dep trai\",\"sdt\":null,\"admin\":0},\"cart\":[]}'),('G6vX9JAdGNKUc_sSSEE3ru1mZUm4q3RM',1530173463,'{\"cookie\":{\"originalMaxAge\":null,\"expires\":null,\"httpOnly\":true,\"path\":\"/\"},\"isLogged\":true,\"user\":{\"email\":\"vannghia@gmail.com\",\"matkhau\":\"f5bb0c8de146c67b44babbf4e6584cc0\",\"hoten\":\"Nghia dep trai\",\"sdt\":null,\"admin\":0},\"cart\":[{\"id\":\"c0010\",\"quantity\":2},{\"id\":\"c0049\",\"quantity\":5},{\"id\":\"c0006\",\"quantity\":2},{\"id\":\"c0001\",\"quantity\":3},{\"id\":\"c0024\",\"quantity\":4},{\"id\":\"c0046\",\"quantity\":1},{\"id\":\"c0007\",\"quantity\":3}]}'),('GL2bExDRr95PB_jjWGkWYfiSI7On9m4e',1530161278,'{\"cookie\":{\"originalMaxAge\":null,\"expires\":null,\"httpOnly\":true,\"path\":\"/\"},\"isLogged\":true,\"user\":{\"email\":\"vannghia@gmail.com\",\"matkhau\":\"f5bb0c8de146c67b44babbf4e6584cc0\",\"hoten\":\"Nghia dep trai\",\"sdt\":null,\"admin\":0},\"cart\":[]}'),('LHtMXIW2kcT4rXdZNdZyVI475SJFrXxR',1530097847,'{\"cookie\":{\"originalMaxAge\":null,\"expires\":null,\"httpOnly\":true,\"path\":\"/\"},\"isLogged\":true,\"user\":{\"email\":\"vannghia@gmail.com\",\"matkhau\":\"f5bb0c8de146c67b44babbf4e6584cc0\",\"hoten\":\"Nghia dep trai\",\"sdt\":null,\"admin\":0}}'),('aw-RvQN0ivpgWeOLXTs3-sm7CpTZ8ju_',1530103237,'{\"cookie\":{\"originalMaxAge\":null,\"expires\":null,\"httpOnly\":true,\"path\":\"/\"},\"isLogged\":false,\"user\":null,\"cart\":[]}');
+/*!40000 ALTER TABLE `sessions` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -73,8 +183,31 @@ CREATE TABLE `taikhoan` (
 
 LOCK TABLES `taikhoan` WRITE;
 /*!40000 ALTER TABLE `taikhoan` DISABLE KEYS */;
-INSERT INTO `taikhoan` VALUES ('asdasdas','26f3808cdec7fb1ba79cd549cba6e200',NULL,NULL,0),('nghia@gmail.com','c4bb408471eb7727e59e11385b0a8c19',NULL,NULL,0),('vanasdasnghia17@gmail.com','8a903158143cf0ea971a46d31d319ecd',NULL,NULL,0),('vannghia@gmail.com','0c06970653b2d1663f9695e4ef613fe3',NULL,NULL,0);
 /*!40000 ALTER TABLE `taikhoan` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `thuonghieu`
+--
+
+DROP TABLE IF EXISTS `thuonghieu`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `thuonghieu` (
+  `nhasanxuat` varchar(20) NOT NULL,
+  `quocgia` varchar(20) DEFAULT NULL,
+  PRIMARY KEY (`nhasanxuat`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `thuonghieu`
+--
+
+LOCK TABLES `thuonghieu` WRITE;
+/*!40000 ALTER TABLE `thuonghieu` DISABLE KEYS */;
+INSERT INTO `thuonghieu` VALUES ('Canon','Nhật Bản'),('Fujifilm','Nhật Bản'),('GoPro','Mỹ'),('Kodak','Mỹ'),('LG','Hàn Quốc'),('Nikon','Nhật Bản'),('Panasonic','Nhật Bản'),('Ricoh','Mỹ'),('Samsung','Hàn Quốc'),('Sony','Nhật bản');
+/*!40000 ALTER TABLE `thuonghieu` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -94,4 +227,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-06-25  0:46:08
+-- Dump completed on 2018-06-27 16:57:21

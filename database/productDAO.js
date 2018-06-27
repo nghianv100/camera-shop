@@ -16,17 +16,22 @@ module.exports.load10MostViews = function () {
 }
 
 module.exports.loadTypes = function () {
-    var sql = `SELECT DISTINCT loai FROM sanpham;`
+    var sql = `SELECT * FROM loaisanpham;`
     return db.executeQuery(sql);
 }
 
 module.exports.loadBrands = function () {
-    var sql = `SELECT DISTINCT nhasanxuat FROM sanpham;`;
+    var sql = `SELECT * FROM thuonghieu`;
     return db.executeQuery(sql);
 }
 
 module.exports.loadNations = function () {
     var sql = `SELECT DISTINCT xuatxu FROM sanpham;`;
+    return db.executeQuery(sql);
+}
+
+module.exports.loadTypeName = function(type) {
+    var sql = `SELECT tenloai FROM loaisanpham WHERE loai = "${type}";`;
     return db.executeQuery(sql);
 }
 
