@@ -58,7 +58,13 @@ app.use('/search', searchRouter);
 app.use('/contact', contactRouter);
 app.use('/account', restrict, accountRouter);
 app.use('/cart', restrict, cartRouter);
-app.use('/admin', adminRouter);
+app.use('/admin', [restrict, function (req, res, next) {
+  if (req.session.isAdmin) {
+    next();
+  } else {
+    res.send('Tài khoản của bạn không được cấp quyền để truy cập vào phân vùng này.');
+  }
+}], adminRouter);
 
 // Bắt lỗi
 app.use(function (req, res, next) {

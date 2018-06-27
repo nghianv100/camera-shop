@@ -90,6 +90,11 @@ License URL: http://creativecommons.org/licenses/by/3.0/
           </div>
         </div>
         <ul class="dropdown-menu">
+          {{#if layoutVM.isAdmin}}
+          <li>
+            <a href="/admin"  style="font-weight: bold; color: blue">ADMIN DASHBOARD</a>
+          </li>
+          {{/if}}
           <li>
             <a href="/account">Cập nhật thông tin</a>
           </li>

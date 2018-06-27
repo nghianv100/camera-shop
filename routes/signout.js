@@ -4,6 +4,7 @@ var router = express.Router();
 
 router.post('/', (req, res, next) => {
     req.session.isLogged = false;
+    req.session.isAdmin = false;
     req.session.user = null;
     // req.session.cart = [];
     res.redirect(req.headers.referer);

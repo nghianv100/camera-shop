@@ -7,6 +7,7 @@ module.exports = function (req, res, next) {
                 typesList: rowsTypes,
                 brandsList: rowsBrands,
                 isLogged: req.session.isLogged,
+                isAdmin: req.session.isAdmin,
                 user: req.session.user
             }
             next();

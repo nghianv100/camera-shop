@@ -35,16 +35,16 @@ router.post('/', function (req, res, next) {
                 req.session.signin_msg = 'Mật khẩu không chính xác.';
                 res.redirect('/signin');
             } else {
+                if(result[0].admin == 1) {
+                    req.session.isAdmin = true;
+                }
+                
                 req.session.isLogged = true;
+
                 req.session.user = result[0];
                 req.session.cart = [];
 
-                var url = '/';
-                if (req.query.retUrl) {
-                    url = req.query.retUrl;
-                }
-
-                res.redirect(url);
+                res.redirect('/');
             }
         }
     });

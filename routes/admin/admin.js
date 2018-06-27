@@ -1,40 +1,25 @@
 var express = require('express');
 
-var router = express.Router();
+var mnBrands = require('./mn-brands');
+var mnTypes = require('./mn-types');
+var mnProducts = require('./mn-products');
+var mnOrders = require('./mn-orders');
 
-router.get('/', function(req, res, next) {
+var router = express();
+
+router.use('/quanlythuonghieu', mnBrands);
+router.use('/quanlydonhang', mnOrders);
+router.use('/quanlysanpham', mnProducts);
+router.use('/quanlyloai', mnTypes);
+
+router.get('/', function (req, res, next) {
     res.render('admin/dashboard', {
-        title: 'Dashboard | CamShop',
         layout: 'admin/layout'
     })
 });
 
-router.get('/quanlythuonghieu', function(req, res, next) {
-    res.render('admin/mabrands', {
-        title: 'Dashboard | CamShop',
-        layout: 'admin/layout'
-    })
-});
-
-router.get('/quanlydonhang', function(req, res, next) {
-    res.render('admin/maorders', {
-        title: 'Dashboard | CamShop',
-        layout: 'admin/layout'
-    })
-});
-
-router.get('/quanlysanpham', function(req, res, next) {
-    res.render('admin/maproducts', {
-        title: 'Dashboard | CamShop',
-        layout: 'admin/layout'
-    })
-});
-
-router.get('/quanlyloai', function(req, res, next) {
-    res.render('admin/matypes', {
-        title: 'Dashboard | CamShop',
-        layout: 'admin/layout'
-    })
-});
+router.get('/home', function (req, res, next) {
+    res.redirect('/admin');
+})
 
 module.exports = router;
