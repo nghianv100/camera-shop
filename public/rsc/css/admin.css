@@ -650,3 +650,11 @@ body {
         border-radius:10px;
      }  
   }
+  .dashboard-info th{
+    color: #0a3964;
+}
+p{
+  color: #0a3964;
+  font-weight: bold;
+  font-size: 13px;
+}
