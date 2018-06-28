@@ -1,8 +1,10 @@
 var express = require('express');
-var accountDao = require('../database/accountDAO');
+var accountDAO = require('../database/accountDAO');
 var orderDAO = require('../database/orderDAO');
 var productDAO = require('../database/productDAO');
 var priceFormat = require('../utils/price-format');
+var dateFormat = require('../utils/date-format');
+var switcher = require('../utils/switch-code');
 var md5 = require('md5');
 
 var router = express.Router();
@@ -46,6 +48,11 @@ router.get('/password', function (req, res, next) {
 
 router.get('/orders', function (req, res, next) {
     orderDAO.loadUserOrders(req.session.user.email).then(result => {
+        for(var i = 0; i < result.length; i++) {
+            result[i].ngay_f = dateFormat(result[i].ngay);
+            result[i].trangthai_f = switcher.codeToStatus(result[i].trangthai);
+            result[i].thanhtien_f = priceFormat(result[i].thanhtien);
+        }
         res.render('account/orders', {
             title: 'Quản lý đơn hàng | CamShop',
             orders: result
@@ -67,6 +74,8 @@ router.get('/orders/:orderId', function (req, res, next) {
                     }
                 }
                 _order[0].thanhtien_f = priceFormat(_order[0].thanhtien);
+                _order[0].ngay_f = dateFormat(_order[0].ngay);
+                _order[0].trangthai_f = switcher.codeToStatus(_order[0].trangthai);
                 res.render('account/order-detail', {
                     title: 'Thông tin đơn hàng | CamShop',
                     order: _order[0],
@@ -83,7 +92,7 @@ router.post('/password', function (req, res, next) {
         res.redirect('/account/password');
     } else {
         var new_password = md5(req.body.new_password);
-        accountDao.changePassword(req.session.user.email, new_password).then(result => {
+        accountDAO.changePassword(req.session.user.email, new_password).then(result => {
             req.session.change_password_succ = true;
             res.redirect('/account/password');
         });

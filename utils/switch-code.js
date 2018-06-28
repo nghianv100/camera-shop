@@ -41,3 +41,15 @@ module.exports.codeToNation = function (code) {
     }
     return result;
 }
+
+module.exports.codeToStatus = function (code) {
+    var result;
+    if (code == 0 || code == '0') {
+        result = 'Chưa giao hàng';
+    } else if (code == 1 || code == '1') {
+        result = 'Đang giao hàng';
+    } else if (code == 2 || code == '2') {
+        result = 'Đã giao hàng';
+    }
+    return result;
+}

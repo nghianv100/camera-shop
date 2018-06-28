@@ -1,7 +1,4 @@
 <div class="container">
-    {{#if update_succ}}
-        <div class="alert alert-success" role="alert" style="text-align: center">Cập nhật thông tin thành công</div>
-    {{/if}}
     <div class="col-md-3">
         <div class="css-treeview">
             <h4>TÀI KHOẢN</h4>
@@ -13,13 +10,16 @@
                     <li>Đổi mật khẩu</li>
                 </a>
                 <a href="/account/orders">
-                    <li>Quản lý đơn hàng</li>
+                    <li>Xem đơn hàng</li>
                 </a>
             </ul>
         </div>
         <div class="clearfix"></div>
     </div>
     <div class="col-md-9">
+        {{#if update_succ}}
+        <div class="alert alert-success" role="alert" style="text-align: center">Cập nhật thông tin thành công</div>
+        {{/if}}
         <div class="account-update-info">
             <h4>Cập nhật thông tin cá nhân</h4>
             <form action="/account" method="post">
@@ -39,7 +39,7 @@
                     <button type="submit" class="btn btn-primary">Cập nhật</button>
                     <button type="reset" class="btn btn-danger">Hủy bỏ</button>
                 </div>
-                
+
             </form>
         </div>
         {{!--
