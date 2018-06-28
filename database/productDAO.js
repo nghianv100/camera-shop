@@ -225,3 +225,38 @@ module.exports.updateImage = function(id, img) {
     var sql = `UPDATE sanpham SET img = "${img}" WHERE idsanpham = "${id}";`
     return db.executeQuery(sql);
 }
+
+module.exports.removeProduct = function(id) {
+    var sql = `DELETE FROM sanpham WHERE idsanpham = "${id}";`;
+    return db.executeQuery(sql);
+}
+
+module.exports.addNewType = function (id, name) {
+    var sql = `INSERT INTO loaisanpham (loai, tenloai) VALUES ("${id}", "${name}");`;
+    return db.executeQuery(sql);
+}
+
+module.exports.updateType = function (id, name) {
+    var sql = `UPDATE loaisanpham SET tenloai = "${name}" WHERE loai = "${id}";`;
+    return db.executeQuery(sql);
+}
+
+module.exports.removeType = function (id) {
+    var sql = `DELETE FROM loaisanpham WHERE loai = "${id}";`;
+    return db.executeQuery(sql);
+}
+
+module.exports.addNewBrand = function (name, nation) {
+    var sql = `INSERT INTO thuonghieu (nhasanxuat, quocgia) VALUES ("${name}", "${nation}");`;
+    return db.executeQuery(sql);
+}
+
+module.exports.updateBrand = function(name, nation) {
+    var sql = `UPDATE thuonghieu SET quocgia = "${nation}" WHERE nhasanxuat = "${name}";`;
+    return db.executeQuery(sql);
+}
+
+module.exports.removeBrand = function (name) {
+    var sql = `DELETE FROM thuonghieu WHERE nhasanxuat = "${name}";`;
+    return db.executeQuery(sql);
+}

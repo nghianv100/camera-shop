@@ -6351,13 +6351,13 @@ p.amount-product span {
 }
 
 .account-update-info {
-    background-color: rgba(130, 180, 255, 0.17);
+    background-color: rgba(185, 185, 185, 0.2);
     border-radius: 12px;
     padding: 30px;
 }
 
 .account-password {
-    background-color: rgba(158, 137, 92, 0.17);
+    background-color: rgba(185, 185, 185, 0.2);
     border-radius: 12px;
     padding: 30px;
 }

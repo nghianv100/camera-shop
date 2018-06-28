@@ -707,13 +707,22 @@ p {
   margin: 20px auto;
 }
 
-.edit-product {
+.edit-product,
+.manager-product {
   border-radius: 10px;
   background: white;
   padding: 20px;
 }
 
 .edit-product h3 {
+  text-align: center;
+  margin: 0;
+  margin-bottom: 20px;
+  color: darkred;
+  font-weight: bold;
+}
+
+.manager-product h3 {
   text-align: center;
   margin: 0;
   margin-bottom: 20px;

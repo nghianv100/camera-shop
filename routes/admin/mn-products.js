@@ -6,8 +6,6 @@ var upload = multer({
 });
 
 var productDAO = require('../../database/productDAO');
-var orderDAO = require('../../database/orderDAO');
-var accountDAO = require('../../database/accountDAO');
 
 var idRandom = require('../../utils/id-random');
 
@@ -16,7 +14,6 @@ var router = express.Router();
 router.get('/', function (req, res, next) {
     productDAO.loadAllProducts().then(result => {
         res.render('admin/maproducts', {
-            title: 'Dashboard | CamShop',
             layout: 'admin/layout',
             products: result
         })
@@ -83,6 +80,16 @@ router.post('/edit-update', upload.single('image'), async function (req, res, ne
         res.send('Cập nhật thành công.');
     } catch (error) {
         res.send('Cập nhật thất bại.');
+    }
+});
+
+router.post('/edit-remove', async function(req, res, next) {
+    var id = req.body.id;
+    try {
+        var x = await productDAO.removeProduct(id);
+        res.send(`Xóa sản phẩm thành công. ID: ${id}`);
+    } catch (error) {
+        res.send(`Xóa sản phẩm thất bại vì sản phẩm tồn tại trong các bảng dữ liệu khác.`);
     }
 });
 
