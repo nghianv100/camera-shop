@@ -1,5 +1,9 @@
 var db = require('./db');
 
+module.exports.loadAll = function() {
+    return db.executeQuery('SELECT * FROM taikhoan;');
+}
+
 module.exports.addUser = function(email, password, name) {
     var sql = `INSERT INTO taikhoan(email, matkhau, hoten) VALUES ("${email}", "${password}", "${name}");`;
     return db.executeQuery(sql);

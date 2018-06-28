@@ -1,5 +1,17 @@
 var db = require('./db');
 
+module.exports.loadAllProducts = function() {
+    return db.executeQuery('SELECT * FROM sanpham;');
+}
+
+module.exports.loadAllTypes = function() {
+    return db.executeQuery('SELECT * FROM loaisanpham;');
+}
+
+module.exports.loadAllBrands = function() {
+    return db.executeQuery('SELECT * FROM thuonghieu;');
+}
+
 module.exports.load10Newest = function () {
     var sql = `SELECT * FROM sanpham ORDER BY ngaytiepnhan DESC LIMIT 10;`;
     return db.executeQuery(sql);
@@ -193,4 +205,11 @@ async function updateInventory (cart) {
         var temp = await db.executeQuery(sql);
     }
     var final = await db.executeQuery(`UPDATE sanpham SET soluong = 0 WHERE soluong < 0;`);
+}
+
+module.exports.updateProducInformation = function (info) {
+    var sql = `UPDATE sanpham SET tensanpham="${info.name}", 
+                gia=${info.price_f}, loai="${info.type}", nhasanxuat = "${info.brand}", xuatxu= "${info.origin}", mota = "${info.detail}", soluong = ${info.number_f} 
+                WHERE idsanpham = "${info.id}" ;`;
+    return db.executeQuery(sql);
 }

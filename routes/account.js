@@ -67,6 +67,7 @@ router.get('/orders/:orderId', function (req, res, next) {
             productDAO.loadBySubsOrder(_subsOrder).then(list => {
                 for(var i= 0; i < _subsOrder.length; i++) {
                     for(var j = 0; j < list.length; j++) {
+                        list[j].gia_f = priceFormat(list[j].gia);
                         if(_subsOrder[i].idsanpham == list[j].idsanpham) {
                             _subsOrder[i].info = list[j];
                             break;

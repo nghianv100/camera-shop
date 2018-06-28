@@ -1,5 +1,9 @@
 var db = require('./db');
 
+module.exports.loadAll = function() {
+    return db.executeQuery('SELECT * FROM donhang;');
+}
+
 module.exports.createOrder = function(orderId, email, total, name, address, phone) {
     var sql = `INSERT INTO donhang (madonhang, email, thanhtien, hoten, diachi, sdt, ngay) 
                     VALUES ("${orderId}", "${email}", ${total}, "${name}", "${address}", "${phone}", NOW());`

@@ -702,3 +702,25 @@ p {
   padding: 0;
   color: gray;
 }
+
+.manager-product > table {
+  margin: 20px auto;
+}
+
+.edit-product {
+  border-radius: 10px;
+  background: white;
+  padding: 20px;
+}
+
+.edit-product h3 {
+  text-align: center;
+  margin: 0;
+  margin-bottom: 20px;
+  color: darkred;
+  font-weight: bold;
+}
+
+.edit-product form button {
+  width: 100px;
+}
