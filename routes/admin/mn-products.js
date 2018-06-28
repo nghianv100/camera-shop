@@ -1,12 +1,19 @@
 var express = require('express');
+var multer = require('multer');
+
+var upload = multer({
+    dest: 'public/product_img'
+});
 
 var productDAO = require('../../database/productDAO');
 var orderDAO = require('../../database/orderDAO');
 var accountDAO = require('../../database/accountDAO');
 
+var idRandom = require('../../utils/id-random');
+
 var router = express.Router();
 
-router.get('/', function(req, res, next) {
+router.get('/', function (req, res, next) {
     productDAO.loadAllProducts().then(result => {
         res.render('admin/maproducts', {
             title: 'Dashboard | CamShop',
@@ -16,15 +23,39 @@ router.get('/', function(req, res, next) {
     });
 });
 
-router.get('/edit/:productId', function(req, res, next) {
-    detailProduct(req, res, next);
+router.get('/add', async function (req, res, next) {
+    var types = await productDAO.loadAllTypes();
+    var brands = await productDAO.loadAllBrands();
+
+    res.render('admin/product-add', {
+        layout: 'admin/layout',
+        types: types,
+        brands: brands
+    });
 });
 
-router.post('/edit-update', function(req, res, next) {
-    editProduct(req, res, next);
+router.post('/add', upload.single('image'), async function (req, res, next) {
+    var id = idRandom();
+
+    req.body.price_f = parseInt(req.body.price);
+    req.body.number_f = parseInt(req.body.number);
+
+    try {
+        var x = await productDAO.addNewProduct(id, req.body);
+
+        if (req.file) {
+            var image = req.file.filename;
+            var y = await productDAO.updateImage(id, image);
+        }
+
+        res.send('Thêm sản phẩm thành công.');
+    } catch (error) {
+        console.log(error);
+        res.send('Thêm sản phẩm thất bại.');
+    }
 });
 
-async function detailProduct(req, res, next) {
+router.get('/edit/:productId', async function (req, res, next) {
     var product = await productDAO.loadProduct(req.params.productId);
     var types = await productDAO.loadAllTypes();
     var brands = await productDAO.loadAllBrands();
@@ -35,17 +66,24 @@ async function detailProduct(req, res, next) {
         types: types,
         brands: brands
     });
-}
+});
 
-async function editProduct(req, res, next) {
+router.post('/edit-update', upload.single('image'), async function (req, res, next) {
     req.body.price_f = parseInt(req.body.price);
     req.body.number_f = parseInt(req.body.number);
+
     try {
         var v = await productDAO.updateProducInformation(req.body);
+
+        if (req.file) {
+            var image = req.file.filename;
+            var y = await productDAO.updateImage(req.body.id, image);
+        }
+
         res.send('Cập nhật thành công.');
     } catch (error) {
         res.send('Cập nhật thất bại.');
     }
-}
+});
 
 module.exports = router;

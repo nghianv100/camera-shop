@@ -3,7 +3,7 @@
         {{#with product}}
         <div class="row">
             <div class="col-md-4 single-product-detail-inner-left">
-                <img src="/product/{{id}}/{{img}}" class="img-responsive">
+                <img src="/product_img/{{img}}" class="img-responsive">
             </div>
             <div class="col-md-8 single-product-detail-inner-right">
                 <h3 class="single-product-name">{{name}}</h3>
@@ -46,7 +46,7 @@
                     <div class="resp-tabs-container">
                         <div class="tab1">
                             <div class="single_page_agile_its_w3ls">
-                                {{{detail}}}
+                                {{detail}}
                             </div>
                         </div>
                         <div class="tab2">
@@ -65,7 +65,7 @@
                 {{#each related_type_list}}
                 <a href="/product/{{this.idsanpham}}">
                     <div class="product-related-cell">
-                        <img src="/product/{{this.idsanpham}}/{{this.img}}">
+                        <img src="/product_img/{{this.img}}">
                         <p class="product-related-cell-name">{{this.tensanpham}}</p>
                         <p class="product-related-cell-price">{{this.gia_f}} VND</p>
                     </div>
@@ -77,7 +77,7 @@
                 {{#each related_brand_list}}
                 <a href="/product/{{this.idsanpham}}">
                     <div class="product-related-cell">
-                        <img src="/product/{{this.idsanpham}}/{{this.img}}">
+                        <img src="/product_img/{{this.img}}">
                         <p class="product-related-cell-name">{{this.tensanpham}}</p>
                         <p class="product-related-cell-price">{{this.gia_f}} VND</p>
                     </div>

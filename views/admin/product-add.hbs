@@ -1,18 +1,11 @@
 <div class="edit-product">
-    <h3>Cập nhật thông tin sản phẩm</h3>
+    <h3>Thêm mới một sản phẩm</h3>
     <form id="data" method="POST">
         <div class="row">
-            <div class="col-md-3">
-                <div class="form-group">
-                    <label>ID sản phẩm:</label>
-                    <input id="id" type="text" class="form-control" disabled value="{{product.idsanpham}}">
-                    <input name="id" type="hidden" class="form-control" value="{{product.idsanpham}}">
-                </div>
-            </div>
-            <div class="col-md-9">
+            <div class="col-md-12">
                 <div class="form-group">
                     <label>Tên sản phẩm:</label>
-                    <input id="name" type="text" class="form-control" name="name" value="{{product.tensanpham}}" required>
+                    <input id="name" name="name" type="text" class="form-control" required>
                 </div>
             </div>
         </div>
@@ -20,13 +13,13 @@
             <div class="col-md-3">
                 <div class="form-group">
                     <label>Giá (VND):</label>
-                    <input id="price" type="text" class="form-control" name="price" pattern="^(0|[1-9][0-9]*)$" value="{{product.gia}}" required>
+                    <input id="price" type="text" class="form-control" name="price" pattern="^(0|[1-9][0-9]*)$" required>
                 </div>
             </div>
             <div class="col-md-3">
                 <div class="form-group">
                     <label>Loại:</label>
-                    <select id="type" class="form-control" name="type">
+                    <select id="type" class="form-control" name="type" required>
                         {{#each types}}
                         <option value="{{loai}}">{{tenloai}}</option>
                         {{/each}}
@@ -36,7 +29,7 @@
             <div class="col-md-3">
                 <div class="form-group">
                     <label>Nhà sản xuất:</label>
-                    <select id="brand" class="form-control" name="brand">
+                    <select id="brand" class="form-control" name="brand" required>
                         {{#each brands}}
                         <option value="{{nhasanxuat}}">{{nhasanxuat}}</option>
                         {{/each}}
@@ -46,7 +39,7 @@
             <div class="col-md-3">
                 <div class="form-group">
                     <label>Xuất xứ:</label>
-                    <input id="origin" name="origin" type="text" class="form-control" value="{{product.xuatxu}}" required>
+                    <input id="origin" type="text" class="form-control" name="origin" required>
                 </div>
             </div>
         </div>
@@ -54,30 +47,27 @@
             <div class="col-md-12">
                 <div class="form-group">
                     <label>Mô tả:</label>
-                    <textarea id="detail" type="textarea" class="form-control" name="detail">{{product.mota}}</textarea>
+                    <textarea id="detail" type="textarea" class="form-control" name="detail"></textarea>
                 </div>
             </div>
         </div>
         <div class="row">
-            <div class="col-md-12">
+            <div class="col-md-6">
                 <div class="form-group">
                     <label>Số lượng:</label>
-                    <input id="number" type="number" class="form-control" name="number" min="0" max="100" value="{{product.soluong}}">
+                    <input id="number" type="number" class="form-control" name="number" min="0" max="100" value="1">
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label>Hình ảnh:</label>
+                    <input type="file" id="image" accept="image/*" name="image">
                 </div>
             </div>
         </div>
-        <div class="row" style="margin: 20px auto">
-            <div class="col-md-6">
-                <label>Ảnh sản phẩm:</label>
-                <img src="/product_img/{{product.img}}" style="width: 40%; display: block">
-            </div>
-            <div class="col-md-6">
-                <label>Chọn hình ảnh mới:</label>
-                <input type="file" name="image" accept="image/*">
-                <button id="submitbtn" type="submit" class="btn btn-primary" style="margin-top: 30px; width: 100%; height: 80px; font-size: 2em">Cập nhật</button>
-            </div>
+        <div class="row" style="text-align: center">
+            <button id="submitbtn" type="submit" class="btn btn-primary">Thêm sản phẩm</button>
         </div>
-
     </form>
 </div>
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
@@ -100,14 +90,11 @@
 </div>
 
 <script>
-    $('form select[name="type"]').val('{{product.loai}}');
-    $('form select[name="brand"]').val('{{product.nhasanxuat}}');
-
     $("form#data").submit(function (e) {
         e.preventDefault();
         var formData = new FormData(this);
         $.ajax({
-            url: '/admin/quanlysanpham/edit-update',
+            url: '/admin/quanlysanpham/add',
             type: 'POST',
             data: formData,
             success: function (data) {
@@ -119,5 +106,4 @@
             processData: false
         });
     });
-
 </script>

@@ -1,14 +1,14 @@
 var db = require('./db');
 
-module.exports.loadAllProducts = function() {
+module.exports.loadAllProducts = function () {
     return db.executeQuery('SELECT * FROM sanpham;');
 }
 
-module.exports.loadAllTypes = function() {
+module.exports.loadAllTypes = function () {
     return db.executeQuery('SELECT * FROM loaisanpham;');
 }
 
-module.exports.loadAllBrands = function() {
+module.exports.loadAllBrands = function () {
     return db.executeQuery('SELECT * FROM thuonghieu;');
 }
 
@@ -42,7 +42,7 @@ module.exports.loadNations = function () {
     return db.executeQuery(sql);
 }
 
-module.exports.loadTypeName = function(type) {
+module.exports.loadTypeName = function (type) {
     var sql = `SELECT tenloai FROM loaisanpham WHERE loai = "${type}";`;
     return db.executeQuery(sql);
 }
@@ -173,7 +173,7 @@ module.exports.increaseViews = function (id) {
 
 module.exports.loadByCart = function (cart) {
     var sql = `SELECT * FROM sanpham WHERE idsanpham = "${cart[0].id}" `;
-    for(var i = 1; i < cart.length; i++) {
+    for (var i = 1; i < cart.length; i++) {
         sql += ` OR idsanpham = "${cart[i].id}" `;
     }
     return db.executeQuery(sql);
@@ -192,15 +192,15 @@ module.exports.loadBySubsOrder = function (sub) {
     return db.executeQuery(sql);
 }
 
-async function updateNSold (cart) {
-    for(let i = 0; i < cart.length; i++) {
+async function updateNSold(cart) {
+    for (let i = 0; i < cart.length; i++) {
         let sql = `UPDATE sanpham SET luotban = luotban + ${cart[i].quantity} WHERE idsanpham = "${cart[i].id}";`;
         var temp = await db.executeQuery(sql);
     }
 }
 
-async function updateInventory (cart) {
-    for(let i = 0; i < cart.length; i++) {
+async function updateInventory(cart) {
+    for (let i = 0; i < cart.length; i++) {
         let sql = `UPDATE sanpham SET soluong = soluong - ${cart[i].quantity} WHERE idsanpham = "${cart[i].id}";`;
         var temp = await db.executeQuery(sql);
     }
@@ -208,8 +208,20 @@ async function updateInventory (cart) {
 }
 
 module.exports.updateProducInformation = function (info) {
+    console.log(info);
     var sql = `UPDATE sanpham SET tensanpham="${info.name}", 
                 gia=${info.price_f}, loai="${info.type}", nhasanxuat = "${info.brand}", xuatxu= "${info.origin}", mota = "${info.detail}", soluong = ${info.number_f} 
                 WHERE idsanpham = "${info.id}" ;`;
+    return db.executeQuery(sql);
+}
+
+module.exports.addNewProduct = function (id, info, img) {
+    var sql = `INSERT INTO sanpham (idsanpham, tensanpham, gia, loai, nhasanxuat, xuatxu, mota, soluong, ngaytiepnhan) 
+                VALUES ("${id}", "${info.name}", ${info.price_f}, "${info.type}", "${info.brand}", "${info.origin}", "${info.detail}", ${info.number_f}, NOW());`;
+    return db.executeQuery(sql);
+}
+
+module.exports.updateImage = function(id, img) {
+    var sql = `UPDATE sanpham SET img = "${img}" WHERE idsanpham = "${id}";`
     return db.executeQuery(sql);
 }
