@@ -708,13 +708,16 @@ p {
 }
 
 .edit-product,
-.manager-product {
+.manager-product,
+.manage-orders {
   border-radius: 10px;
   background: white;
   padding: 20px;
 }
 
-.edit-product h3 {
+.edit-product h3,
+.manager-product h3,
+.manage-orders h3{
   text-align: center;
   margin: 0;
   margin-bottom: 20px;
@@ -722,10 +725,65 @@ p {
   font-weight: bold;
 }
 
-.manager-product h3 {
-  text-align: center;
-  margin: 0;
-  margin-bottom: 20px;
+.order-cell {
+  width: 100%;
+  box-shadow: 5px 5px 5px grey;
+  border: 2px solid black;
+  padding: 20px;
+  margin: 20px 0;
+}
+
+.order-cell.not {
+  background-color: rgb(200, 200, 200);
+}
+
+.order-cell.being {
+  background-color: rgb(250, 250, 150);
+}
+
+.order-cell.done {
+  background-color: rgb(120, 250, 120);
+}
+
+.order-cell p {
+  font-size: 1.5em;
+}
+
+.order-cell p span {
   color: darkred;
-  font-weight: bold;
+}
+
+.order-cell .foot {
+  margin: 0 50px;
+  border-top: 0.5px solid gray;
+  padding-top: 20px;
+}
+
+.order-button {
+  background-color: #555555;; /* Green */
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+}
+
+.order-cell .foot .foot-left,
+.order-cell .foot .foot-right {
+  text-align: center;
+}
+
+.order-cell .foot .foot-left {
+  margin-top: 5px;
+}
+
+.order-cell .foot .foot-left p {
+  font-size: 2em;
+  color: rgb(12, 0, 175)
+}
+
+.manage-orders .note {
+  margin: 30px;
 }
