@@ -26,6 +26,6 @@ module.exports.loadSubsOrder = function (orderId) {
 }
 
 module.exports.loadUserOrders = function (email) {
-    var sql = `SELECT * FROM donhang WHERE email = "${email}";`;
+    var sql = `SELECT * FROM donhang WHERE email = "${email}" ORDER BY ngay DESC;`;
     return db.executeQuery(sql);
 }
