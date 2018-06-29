@@ -33,3 +33,8 @@ module.exports.loadUserOrders = function (email) {
     var sql = `SELECT * FROM donhang WHERE email = "${email}" ORDER BY ngay DESC;`;
     return db.executeQuery(sql);
 }
+
+module.exports.updateOrder = function (madon, status) {
+    var sql = `UPDATE donhang SET trangthai = ${status} WHERE madonhang = "${madon}";`;
+    return db.executeQuery(sql);
+}

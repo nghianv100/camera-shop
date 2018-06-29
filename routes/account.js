@@ -48,7 +48,7 @@ router.get('/password', function (req, res, next) {
 
 router.get('/orders', function (req, res, next) {
     orderDAO.loadUserOrders(req.session.user.email).then(result => {
-        for(var i = 0; i < result.length; i++) {
+        for (var i = 0; i < result.length; i++) {
             result[i].ngay_f = dateFormat(result[i].ngay);
             result[i].trangthai_f = switcher.codeToStatus(result[i].trangthai);
             result[i].thanhtien_f = priceFormat(result[i].thanhtien);
@@ -65,10 +65,10 @@ router.get('/orders/:orderId', function (req, res, next) {
     orderDAO.loadOrder(orderId).then(_order => {
         orderDAO.loadSubsOrder(orderId).then(_subsOrder => {
             productDAO.loadBySubsOrder(_subsOrder).then(list => {
-                for(var i= 0; i < _subsOrder.length; i++) {
-                    for(var j = 0; j < list.length; j++) {
+                for (var i = 0; i < _subsOrder.length; i++) {
+                    for (var j = 0; j < list.length; j++) {
                         list[j].gia_f = priceFormat(list[j].gia);
-                        if(_subsOrder[i].idsanpham == list[j].idsanpham) {
+                        if (_subsOrder[i].idsanpham == list[j].idsanpham) {
                             _subsOrder[i].info = list[j];
                             break;
                         }
@@ -88,15 +88,17 @@ router.get('/orders/:orderId', function (req, res, next) {
 });
 
 router.post('/password', function (req, res, next) {
-    if (req.body.old_password != req.session.user.matkhau) {
-        req.session.change_password_fail = true;
-        res.redirect('/account/password');
-    } else {
+    var old_password = md5(req.body.old_password);
+    if(old_password == req.session.user.matkhau) {
         var new_password = md5(req.body.new_password);
         accountDAO.changePassword(req.session.user.email, new_password).then(result => {
             req.session.change_password_succ = true;
+            req.session.user.matkhau = new_password;
             res.redirect('/account/password');
         });
+    } else {
+        req.session.change_password_fail = true;
+        res.redirect('/account/password');
     }
 });
 
