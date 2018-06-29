@@ -6659,6 +6659,15 @@ form#contact .total > h3 {
 .order-detail-footer {
     padding: 20px;
 }
+
 .bg{
     background-image: url("/public/rsc/img/bg.jpg");
+}
+
+#signup_form #submitbtn {
+    font-size: 1.5em;
+    font-weight: bold;
+    background-color: black;
+    color: white;
+    margin: 10px 0 10px 120px;
 }
