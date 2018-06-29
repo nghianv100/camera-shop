@@ -6659,3 +6659,6 @@ form#contact .total > h3 {
 .order-detail-footer {
     padding: 20px;
 }
+.bg{
+    background-image: url("/public/rsc/img/bg.jpg");
+}
