@@ -693,7 +693,7 @@ p {
   font-size: 13px;
 }
 
-.dropdown-menu.animated.fadeInUp form > input {
+.dropdown-menu.animated.fadeInUp form>input {
   width: 100%;
   text-align: left;
   border: none;
@@ -703,7 +703,7 @@ p {
   color: gray;
 }
 
-.manager-product > table {
+.manager-product>table {
   margin: 20px auto;
 }
 
@@ -717,7 +717,7 @@ p {
 
 .edit-product h3,
 .manager-product h3,
-.manage-orders h3{
+.manage-orders h3 {
   text-align: center;
   margin: 0;
   margin-bottom: 20px;
@@ -760,7 +760,9 @@ p {
 }
 
 .order-button {
-  background-color: #555555;; /* Green */
+  background-color: #555555;
+  ;
+  /* Green */
   border: none;
   color: white;
   padding: 15px 32px;
@@ -786,4 +788,63 @@ p {
 
 .manage-orders .note {
   margin: 30px;
+}
+
+/* Order detail */
+
+.order-detail {
+  border: 5px solid darkblue;
+}
+
+.order-detail.not {
+  background-color: rgb(200, 200, 200);
+}
+
+.order-detail.being {
+  background-color: rgb(250, 250, 150);
+}
+
+.order-detail.done {
+  background-color: rgb(120, 250, 120);
+}
+
+.order-detail-header {
+  border-bottom: 5px solid darkblue;
+  padding: 20px;
+}
+
+.order-detail-header p {
+  text-align: center;
+  font-size: 2em;
+  font-weight: bold;
+}
+
+.order-detail-body {
+  padding: 20px;
+  border-bottom: 5px solid darkblue;
+}
+
+.order-detail-body p.nghia {
+  margin-bottom: 5px;
+  font-size: 1.2em;
+}
+
+.order-detail-body p.nghia>span {
+  font-weight: bold;
+  color: darkred;
+}
+
+.order-detail-body p.deptrai {
+  margin-top: 20px;
+  font-size: 1.5em;
+  text-align: right;
+}
+
+.order-detail-body p.deptrai>span {
+  font-weight: bold;
+  color: darkred;
+}
+
+.order-detail-footer {
+  padding: 20px;
 }
