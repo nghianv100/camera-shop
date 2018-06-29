@@ -25,6 +25,7 @@ router.post('/', function (req, res, next) {
     accountDAO.updateUser(req.session.user.email, req.body.name, req.body.phone).then(result => {
         req.session.update_succ = true;
         req.session.user.hoten = req.body.name;
+        req.session.user.sdt = req.body.phone;
         res.redirect('/account');
     });
 

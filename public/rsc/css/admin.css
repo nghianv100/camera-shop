@@ -65,6 +65,8 @@ footer .copy {
 .header .logo h1 a {
   color: #fff;
   font-family: 'Open Sans Condensed', sans-serif;
+  font-size: 0.5em;
+  font-weight: bold;
 }
 
 .header .logo h1 a:hover {
